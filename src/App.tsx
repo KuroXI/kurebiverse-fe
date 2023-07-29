@@ -1,12 +1,16 @@
+import { Box } from "@mui/material";
 import { Navbar } from "./components";
+import { Route, Routes } from "react-router-dom";
+import { LandingPage } from "./pages";
 
 function App() {
   return (
-    <>
-      <div>
-        <Navbar name="glenn" age={1}/>
-      </div>
-    </>
+    <Box>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </Box>
   );
 }
 
