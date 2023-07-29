@@ -7,7 +7,7 @@ type QueryPagePerPage = {
 
 export const animeApi = createApi({
   reducerPath: "animeApi",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   endpoints: (builder) => ({
     getSearchAnime: builder.query<SearchType, string>({
       query: (searchString) => `/${searchString}`,

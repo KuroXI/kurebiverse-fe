@@ -4,6 +4,8 @@ import { Box, Button } from "@mui/material";
 import { Menu, Face, Search, ArrowDropDown, Cancel } from "@mui/icons-material";
 import "./styles.scss";
 
+import kurebiimage from "../../assets/kurebiverse.png";
+
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchMenuOpen, setSearchMenuOpen] = useState(false);
@@ -32,7 +34,7 @@ const Navbar = () => {
   return (
     <Box
       component="nav"
-      className={`fixed top-0 left-0 w-full ${
+      className={`fixed z-30 top-0 left-0 w-full ${
         isNavbarSolid ? "bg-[#121212]" : "bg-transparent"
       } flex justify-between items-center px-10 py-2`}
     >
@@ -40,9 +42,13 @@ const Navbar = () => {
         <Menu className="text-white cursor-pointer" />
       </Box>
       <NavLink to="/">
-        <h1 className="text-[#B4EA43] xl:text-5xl lg:text-4xl md:text-3xl text-2xl pt-2 select-none">
-          Kurebiverse
-        </h1>
+        <Box className="overflow-hidden h-[60px] flex justify-center items-center">
+          <img
+            src={kurebiimage}
+            alt="KurebiVerse"
+            className="lg:w-[250px] md:w-[200px] sm:w-[150px] w-[130px]"
+          />
+        </Box>
       </NavLink>
       <Box className="hidden md:flex justify-center items-center gap-3">
         <form className="relative">
@@ -63,11 +69,14 @@ const Navbar = () => {
         <Search className="text-white cursor-pointer" />
       </Box>
       <Box
-        className={`md:hidden bg-gradient-to-tl from-[#B4EA43]/10 absolute top-0 h-screen w-2/3 ${
+        className={`z-40 md:hidden bg-gradient-to-tl from-[#B4EA43]/10 absolute top-0 h-screen w-2/3 ${
           mobileMenuOpen ? "left-0" : "-left-full"
         } backdrop-blur-lg flex flex-col justify-start items-center py-5`}
       >
-        <h1 className="text-[#B4EA43] text-2xl">Kurebiverse</h1>
+        <h1 className="hidden">Kurebiverse</h1>
+        <Box className="overflow-hidden h-[60px] flex justify-center items-center">
+          <img src={kurebiimage} alt="KurebiVerse" className="w-[180px]" />
+        </Box>
         <Box className="mt-10">
           <form className="flex justify-center items-center gap-3 w-full">
             <input
