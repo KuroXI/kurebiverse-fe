@@ -1,3 +1,4 @@
-import { Navbar } from "./Navbar/Navbar";
+import { Navbar } from "./Navbar";
+import { SEO } from "./SEO";
 
-export { Navbar };
+export { Navbar, SEO };
