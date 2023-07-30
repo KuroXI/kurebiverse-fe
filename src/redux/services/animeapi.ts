@@ -9,32 +9,32 @@ export const animeApi = createApi({
   reducerPath: "animeApi",
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   endpoints: (builder) => ({
-    getSearchAnime: builder.query<SearchType, string>({
+    getSearchAnime: builder.query({
       query: (searchString) => `/${searchString}`,
     }),
-    getAnimeInfo: builder.query<AnimeInfoType, string>({
+    getAnimeInfo: builder.query({
       query: (animeId) => `/info/${animeId}`,
     }),
-    getAnimeStreamingLinks: builder.query<WatchAnimeType, string>({
+    getAnimeStreamingLinks: builder.query({
       query: (episodeId) => `/watch/${episodeId}`,
     }),
-    getAnimeRecentEpisodes: builder.query<AnimeQueryType, QueryPagePerPage>({
+    getAnimeRecentEpisodes: builder.query({
       query: ({ page, perPage }: QueryPagePerPage) =>
         `/recent-episodes?page=${page}&perPage=${perPage}`,
     }),
-    getTrendingAnime: builder.query<AnimeQueryType, QueryPagePerPage>({
+    getTrendingAnime: builder.query({
       query: ({ page, perPage }: QueryPagePerPage) =>
         `/trending?page=${page}&perPage=${perPage}`,
     }),
-    getPopularAnime: builder.query<AnimeQueryType, QueryPagePerPage>({
+    getPopularAnime: builder.query({
       query: ({ page, perPage }: QueryPagePerPage) =>
         `/popular?page=${page}&perPage=${perPage}`,
     }),
-    getAiringSchedule: builder.query<AnimeQueryType, unknown>({
+    getAiringSchedule: builder.query({
       query: () => `/airing-schedule
       `,
     }),
-    getRandomAnime: builder.query<RandomAnimeType, unknown>({
+    getRandomAnime: builder.query({
       query: () => `/random-anime`,
     }),
   }),

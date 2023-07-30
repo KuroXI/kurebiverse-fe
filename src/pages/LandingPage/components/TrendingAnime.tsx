@@ -14,14 +14,14 @@ const TrendingAnime = () => {
   });
 
   return (
-    <Box>
-      <h3 className="text-white font-bold text-3xl mb-5">
+    <Box className="mt-5">
+      <h3 className="text-white font-bold xl:text-3xl lg:text-2xl mb-5">
         Trending Anime
         <span>
-          <ArrowForwardIosIcon />
+          <ArrowForwardIosIcon className="text-[100px!important]" />
         </span>
       </h3>
-      <Slider {...settings}>
+      <Slider className="h-max" {...settings}>
         {data?.results.map((anime, index) => {
           return <AnimeCard key={`${index}-popular`} {...anime} />;
         })}

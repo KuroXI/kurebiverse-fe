@@ -19,17 +19,17 @@ const Hero = () => {
           className="object-cover h-full w-full"
         />
       </Box>
-      <Box className="pl-16 text-xl z-20">
-        <h2 className="font-bold xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl">
+      <Box className="xl:pl-16 md:pl-10 sm:pl-7 pl-4 text-xl z-20">
+        <h2 className="font-bold xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl">
           Kimi No Na Wa
         </h2>
-        <Box className="">
+        <Box className="xl:text-xl lg:text-lg md:text-md sm:text-sm text-xs">
           <Box className="flex gap-5 my-3">
             <p className="text-[#6adf34] font-bold">73% Match</p>
             <p>2023</p>
             <p>4 episodes</p>
           </Box>
-          <p className="w-1/3">
+          <p className="xl:w-1/3 md:w-2/4 w-3/4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -39,16 +39,16 @@ const Hero = () => {
           </p>
         </Box>
         <Box className="flex justify-start items-center text-center gap-5 mt-10">
-          <button className="px-10 py-5 bg-white rounded-sm font-bold">
-            <p className="text-black">
+          <button className="xl:px-10 xl:py-5 lg:px-7 lg:py-4 px-4 py-2 bg-white rounded-sm font-bold ">
+            <p className="text-black xl:text-xl lg:text-lg md:text-md sm:text-sm text-xs">
               <span className="mr-2">
                 <PlayArrow className="text-xl" />
               </span>
               Watch Episode 1
             </p>
           </button>
-          <button className="px-10 py-5 bg-[#424242] rounded-sm font-bold">
-            <p>
+          <button className="xl:px-10 xl:py-5 lg:px-7 lg:py-4 px-4 py-2 bg-[#424242] rounded-sm font-bold ">
+            <p className="xl:text-xl lg:text-lg md:text-md sm:text-sm text-xs">
               <span className="mr-2">
                 <Info />
               </span>
