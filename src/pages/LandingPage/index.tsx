@@ -1,11 +1,4 @@
 import { Box } from "@mui/material";
-import { useCallback, useLayoutEffect } from "react";
-import {
-  useGetTrendingAnimeQuery,
-  useGetPopularAnimeQuery,
-  useGetAnimeRecentEpisodesQuery,
-  useGetRandomAnimeQuery,
-} from "../../redux/services/animeapi";
 import Hero from "./components/Hero";
 import TrendingAnime from "./components/TrendingAnime";
 import PopularAnime from "./components/PopularAnime";

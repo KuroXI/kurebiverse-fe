@@ -150,6 +150,7 @@ type WatchAnimeType = {
 
 type AnimeQueryType = {
   currentPage: number;
+  hasNextPage: boolean
   results: {
     id: string;
     title: string;
