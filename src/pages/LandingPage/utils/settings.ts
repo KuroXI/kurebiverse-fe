@@ -1,31 +1,41 @@
 const settings = {
   dots: false,
+  arrows: false,
   infinite: false,
-  speed: 200,
-  slidesToShow: 8,
-  slidesToScroll: 4,
-  initialSlide: 2,
+  speed: 100,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  slidesToShow: 7,
+  swipeToSlide: true,
   responsive: [
+    {
+      breakpoint: 1920,
+      settings: {
+        slidesToShow: 7,
+      },
+    },
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToShow: 6,
+      },
+    },
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 4,
       },
     },
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2,
+        slidesToShow: 4,
       },
     },
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        slidesToShow: 4,
       },
     },
   ],

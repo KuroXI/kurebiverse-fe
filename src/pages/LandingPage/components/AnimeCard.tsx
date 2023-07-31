@@ -16,8 +16,8 @@ const AnimeCard = ({
   releaseDate: string;
 }) => {
   return (
-    <Box className="relative w-[215px]">
-      <img src={image} alt={title} />
+    <Box className="mx-1 h-full">
+      <img src={image} alt={title} className="object-cover w-full h-full" />
     </Box>
   );
 };
