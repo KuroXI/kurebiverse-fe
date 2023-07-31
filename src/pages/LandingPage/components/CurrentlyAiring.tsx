@@ -22,7 +22,7 @@ const CurrentlyAiring = () => {
         </span>
       </h3>
       <Slider className="h-max" {...settings}>
-        {data?.results.map((anime, index) => {
+        {data?.results.map((anime: AnimeQueryResultsType, index: number) => {
           return <AnimeCard key={`${index}-airing`} {...anime} />;
         })}
       </Slider>

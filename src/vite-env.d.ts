@@ -150,15 +150,17 @@ type WatchAnimeType = {
 
 type AnimeQueryType = {
   currentPage: number;
-  hasNextPage: boolean
-  results: {
-    id: string;
-    title: string;
-    image: string;
-    type: string;
-    rating: number;
-    releaseDate: string;
-  }[];
+  hasNextPage: boolean;
+  results: AnimeQueryResultsType[];
+};
+
+type AnimeQueryResultsType = {
+  id: string;
+  title: string;
+  image: string;
+  type: string;
+  rating: number;
+  releaseDate: string;
 };
 
 type RandomAnimeType = {
