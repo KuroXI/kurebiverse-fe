@@ -15,18 +15,18 @@ export const animeApi = createApi({
     getAnimeInfo: builder.query({
       query: (animeId) => `/info/${animeId}`,
     }),
-    getAnimeStreamingLinks: builder.query<WatchAnimeType, string>({
+    getAnimeStreamingLinks: builder.query<WatchAnimeType, QueryPagePerPage>({
       query: (episodeId) => `/episode/${episodeId}`,
     }),
-    getAnimeRecentEpisodes: builder.query({
+    getAnimeRecentEpisodes: builder.query<AnimeQueryType, QueryPagePerPage>({
       query: ({ page, perPage }: QueryPagePerPage) =>
         `/airing?page=${page}&perPage=${perPage}`,
     }),
-    getTrendingAnime: builder.query({
+    getTrendingAnime: builder.query<AnimeQueryType, QueryPagePerPage>({
       query: ({ page, perPage }: QueryPagePerPage) =>
         `/trending?page=${page}&perPage=${perPage}`,
     }),
-    getPopularAnime: builder.query({
+    getPopularAnime: builder.query<AnimeQueryType, QueryPagePerPage>({
       query: ({ page, perPage }: QueryPagePerPage) =>
         `/popular?page=${page}&perPage=${perPage}`,
     }),
