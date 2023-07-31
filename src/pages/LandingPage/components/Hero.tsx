@@ -5,8 +5,6 @@ import { useGetRandomAnimeQuery } from "../../../redux/services/animeapi";
 const Hero = () => {
   const { data } = useGetRandomAnimeQuery(null);
 
-  console.log(JSON.stringify(data, null, 4));
-
   return (
     <Box className="bg-[#333333] xl:h-[90vh] lg:h-[80vh] md:h-[70vh] sm:h-[60vh] h-[50vh] flex justify-start items-center text-white relative">
       <Box
