@@ -1,12 +1,8 @@
 import { Box } from "@mui/material";
 
 const AnimeCard = ({
-  id,
   title,
   image,
-  type,
-  rating,
-  releaseDate,
 }: {
   id: string;
   title: string;
@@ -16,8 +12,8 @@ const AnimeCard = ({
   releaseDate: string;
 }) => {
   return (
-    <Box className="mx-1 h-full">
-      <img src={image} alt={title} className="object-cover w-full h-full" />
+    <Box className="mx-1 h-[15vw] hover:scale-125 hover:bg-black hover:bg-opacity-80">
+      <img src={image} alt={title} className="object-cover w-full h-[15vw]"/>
     </Box>
   );
 };

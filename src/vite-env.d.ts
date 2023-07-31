@@ -163,7 +163,11 @@ type AnimeQueryType = {
 
 type RandomAnimeType = {
   id: string;
-  title: string[];
+  title: {
+    romaji: string;
+    english: string;
+    native: string;
+  };
   malId: number;
   trailer: {
     id: string;
@@ -173,6 +177,7 @@ type RandomAnimeType = {
   image: string;
   popularity: number;
   color: string;
+  cover: string;
   description: string;
   status: string;
   releaseDate: number;
@@ -225,5 +230,5 @@ type RandomAnimeType = {
     id: string;
     title: string;
     chapter: string;
-  };
+  }[];
 };
