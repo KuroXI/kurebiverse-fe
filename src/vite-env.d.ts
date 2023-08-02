@@ -156,7 +156,11 @@ type AnimeQueryType = {
 
 type AnimeResultsType = {
   id: string;
-  title: string;
+  title: {
+    romaji: string;
+    english: string;
+    native: string;
+  };
   image: string;
   type: string;
   rating: number;
