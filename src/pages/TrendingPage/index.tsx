@@ -1,4 +1,4 @@
-import {Box, ImageList, ImageListItem} from "@mui/material";
+import {Box, createTheme, ImageListItem, imageListItemClasses, ThemeProvider} from "@mui/material";
 import {useEffect, useLayoutEffect, useState} from "react";
 import {useInView} from 'react-intersection-observer';
 
@@ -24,33 +24,53 @@ const TrendingPage = () => {
   }, [inView]);
   useLayoutEffect(() => fetchPosts, []);
 
-  return (
-    <Box className={"mt-20"}>
-      <h3 className="text-white font-bold xl:text-3xl lg:text-2xl mb-5 ml-5">Trending Anime</h3>
+  const theme = createTheme({
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 640,
+        md: 900,
+        lg: 1200,
+        xl: 1536
+      }
+    }
+  });
 
-      <ImageList
-        gap={8}
-        rowHeight="auto"
-        sx={{
-          mb: 8,
-          gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 2fr)) !important',
-          gridTemplateRows: 'repeat(auto-fill, minmax(150px, 2fr)) !important'
-        }}
+  return (
+    <ThemeProvider theme={theme}>
+      <h3 className="text-white font-bold xl:text-3xl lg:text-2xl mb-5 ml-5 mt-20">Trending Anime</h3>
+      <Box
         className={"m-5"}
+        gap={1.5}
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "repeat(3, 1fr)",
+            sm: "repeat(4, 1fr)",
+            md: "repeat(6, 1fr)",
+            lg: "repeat(7, 1fr)",
+            xl: "repeat(8, 1fr)"
+          },
+          [`& .${imageListItemClasses.root}`]: {
+            display: "flex",
+            flexDirection: "column"
+          }
+        }}
       >
         {results.map((anime, index) => (
-          <ImageListItem key={`${index}-trending`}>
-            <img
-              src={`${anime.image}?w=300&h=400&fit=crop&auto=format&dpr=2`}
-              alt={anime.title}
-              loading="lazy"
-              className={"cursor-pointer rounded-md"}
-            />
-          </ImageListItem>
+            <ImageListItem key={`${index}-trending`}>
+              <img
+                src={`${anime.image}?w=300&h=400&fit=crop&auto=format&dpr=2`}
+                alt={anime.title.english}
+                loading="lazy"
+                className={"cursor-pointer rounded-md"}
+              />
+            </ImageListItem>
         ))}
+
         <div ref={ref}></div>
-      </ImageList>
-    </Box>
+      </Box>
+    </ThemeProvider>
   );
 };
 
