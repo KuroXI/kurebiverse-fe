@@ -1,9 +1,17 @@
 import { Info, PlayArrow } from "@mui/icons-material";
 import { Box } from "@mui/material";
-import { useGetRandomAnimeQuery } from "../../../redux/services/animeapi";
+import ReactPlayer from "react-player";
+import {useLayoutEffect, useState} from "react";
 
 const Hero = () => {
-  const { data } = useGetRandomAnimeQuery(null);
+  const [data, setData] = useState<RandomAnimeType>();
+
+  const fetchRandoms = () => {
+    fetch(`https://kurebiverse-be.vercel.app/random`)
+      .then((response) => response.json())
+      .then((data: RandomAnimeType) => setData(data))
+  }
+  useLayoutEffect(() => fetchRandoms, []);
 
   return (
     <Box className="bg-[#333333] xl:h-[90vh] lg:h-[80vh] md:h-[70vh] sm:h-[60vh] h-[50vh] flex justify-start items-center text-white relative">
@@ -16,11 +24,23 @@ const Hero = () => {
       >
         <div className="absolute top-0 left-0 h-full w-full pointer-events-none bg-gradient-to-r from-[#141414] to-transparent"></div>
         <div className="absolute top-0 left-0 h-full w-full pointer-events-none bg-gradient-to-t from-[#141414] to-transparent"></div>
-        <img
-          src={data?.cover}
-          alt="video-demo"
-          className="object-cover h-full w-full"
-        />
+        <div className={"object-fill h-full w-full"}>
+          <div className={"h-full w-full absolute opacity-0"}></div>
+          <ReactPlayer
+            url={`https://www.youtube.com/embed/${data?.trailer.id}?rel=0`}
+            controls={false}
+            muted={true}
+            height={"100%"}
+            width={"100%"}
+            playing={true}
+            loop={true}
+            config={{
+              youtube: {
+                playerVars: { disablekb: 1 }
+              }
+            }}
+          />
+        </div>
       </Box>
       <Box className="xl:pl-16 md:pl-10 sm:pl-7 pl-4 text-xl z-20">
         <h2 className="font-bold xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl">
