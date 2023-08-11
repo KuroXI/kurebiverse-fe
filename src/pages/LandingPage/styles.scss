@@ -1,10 +1,12 @@
-.slick-track {
-    background-color: red;
+* {
+  margin: 0;
+}
 
-    div {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.slick-track {
+  div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

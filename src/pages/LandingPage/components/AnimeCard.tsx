@@ -1,24 +1,22 @@
-import { Box } from "@mui/material";
-
-const AnimeCard = ({
-  id,
-  title,
-  image,
-  type,
-  rating,
-  releaseDate,
-}: {
+type AnimeCardType = {
   id: string;
-  title: string;
+  title: {
+    romaji: string;
+    english: string;
+    native: string;
+  };
   image: string;
   type: string;
   rating: number;
   releaseDate: string;
-}) => {
+}
+
+const AnimeCard = ({title, image}: AnimeCardType) => {
   return (
-    <Box className="mx-1 h-full">
-      <img src={image} alt={title} className="object-cover w-full h-full" />
-    </Box>
+    <img
+      src={image}
+      alt={title.english || title.romaji || title.native}
+    />
   );
 };
 

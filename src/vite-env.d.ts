@@ -150,22 +150,30 @@ type WatchAnimeType = {
 
 type AnimeQueryType = {
   currentPage: number;
-  hasNextPage: boolean;
-  results: AnimeQueryResultsType[];
+  hasNextPage: boolean
+  results: AnimeResultsType[];
 };
 
-type AnimeQueryResultsType = {
+type AnimeResultsType = {
   id: string;
-  title: string;
+  title: {
+    romaji: string;
+    english: string;
+    native: string;
+  };
   image: string;
   type: string;
   rating: number;
   releaseDate: string;
-};
+}
 
 type RandomAnimeType = {
   id: string;
-  title: string[];
+  title: {
+    romaji: string;
+    english: string;
+    native: string;
+  };
   malId: number;
   trailer: {
     id: string;
@@ -175,6 +183,7 @@ type RandomAnimeType = {
   image: string;
   popularity: number;
   color: string;
+  cover: string;
   description: string;
   status: string;
   releaseDate: number;
@@ -227,5 +236,30 @@ type RandomAnimeType = {
     id: string;
     title: string;
     chapter: string;
-  };
+  }[];
 };
+
+type RandomType = {
+  id: string
+  title: string
+  translation: {
+    title: string
+    description: string
+    language: string
+  }[]
+  image: string
+  cover: string
+  logos: {
+    url: string
+    aspectRation: number
+    width: number
+  }[]
+  type: string
+  rating: number
+  releaseDate: string
+  description: string
+  genres: string[]
+  duration: number
+  totalEpisodes: number
+  totalSeasons: number
+}
