@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 const style = {
   position: "absolute" as const,
@@ -24,7 +23,7 @@ const AnimeModal = () => {
     console.log(isModalOpen);
   }, [isModalOpen]);
 
-  return <Box sx={style}>{animeName}</Box>;
+  return <Box sx={style}>{}</Box>;
 };
 
 export { AnimeModal };
