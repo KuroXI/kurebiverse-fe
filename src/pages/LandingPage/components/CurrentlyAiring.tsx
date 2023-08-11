@@ -1,21 +1,17 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import settings from "../utils/settings";
 import AnimeCard from "./AnimeCard";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useLayoutEffect, useState } from "react";
+import { useGetAnimeRecentEpisodesQuery } from "../../../redux/services/animeapi";
 
 const CurrentlyAiring = () => {
-  const [data, setData] = useState<AnimeQueryType>();
-
-  const fetchRandoms = () => {
-    fetch(`https://kurebiverse-be.vercel.app/airing?page=1&perPage=20`)
-      .then((response) => response.json())
-      .then((data: AnimeQueryType) => setData(data));
-  };
-  useLayoutEffect(() => fetchRandoms, []);
+  const { data, isLoading } = useGetAnimeRecentEpisodesQuery({
+    page: "1",
+    perPage: "20",
+  });
 
   return (
     <Box className="mt-5">
@@ -31,9 +27,15 @@ const CurrentlyAiring = () => {
         </h3>
       </a>
       <Slider className="h-max" {...settings}>
-        {data?.results.map((anime: AnimeResultsType, index: number) => {
-          return <AnimeCard key={`${index}-airing`} {...anime} />;
-        })}
+        {isLoading ? (
+          <Box className="flex justify-center items-center w-full">
+            <CircularProgress color="success" />
+          </Box>
+        ) : (
+          data?.results.map((anime: AnimeResultsType, index: number) => {
+            return <AnimeCard key={`${index}-airing`} {...anime} />;
+          })
+        )}
       </Slider>
     </Box>
   );

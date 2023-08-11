@@ -1,36 +1,41 @@
-import {Box} from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import settings from "../utils/settings";
 import AnimeCard from "./AnimeCard";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import {useLayoutEffect, useState} from "react";
+import { useGetPopularAnimeQuery } from "../../../redux/services/animeapi";
 
 const PopularAnime = () => {
-  const [data, setData] = useState<AnimeQueryType>();
-
-  const fetchRandoms = () => {
-    fetch(`https://kurebiverse-be.vercel.app/popular?page=1&perPage=20`)
-      .then((response) => response.json())
-      .then((data: AnimeQueryType) => setData(data))
-  }
-  useLayoutEffect(() => fetchRandoms, []);
+  const { data, isLoading } = useGetPopularAnimeQuery({
+    page: "1",
+    perPage: "20",
+  });
 
   return (
     <Box className="mt-5">
-      <a href={"/popular"} className={"hover:underline text-white font-bold inline-block"}>
+      <a
+        href={"/popular"}
+        className={"hover:underline text-white font-bold inline-block"}
+      >
         <h3 className="text-white font-bold xl:text-3xl lg:text-2xl mb-5">
           Popular Anime
           <span>
-            <ArrowForwardIosIcon className="xl:text-3xl lg:text-2xl"/>
+            <ArrowForwardIosIcon className="xl:text-3xl lg:text-2xl" />
           </span>
         </h3>
       </a>
       <Slider className="h-max" {...settings}>
-        {data?.results.map((anime: AnimeQueryResultsType, index: number) => {
-          return <AnimeCard key={`${index}-popular`} {...anime} />;
-        })}
+        {isLoading ? (
+          <Box className="flex justify-center items-center w-full">
+            <CircularProgress color="success" />
+          </Box>
+        ) : (
+          data?.results.map((anime: AnimeResultsType, index: number) => {
+            return <AnimeCard key={`${index}-popular`} {...anime} />;
+          })
+        )}
       </Slider>
     </Box>
   );
