@@ -238,3 +238,28 @@ type RandomAnimeType = {
     chapter: string;
   }[];
 };
+
+type RandomType = {
+  id: string
+  title: string
+  translation: {
+    title: string
+    description: string
+    language: string
+  }[]
+  image: string
+  cover: string
+  logos: {
+    url: string
+    aspectRation: number
+    width: number
+  }[]
+  type: string
+  rating: number
+  releaseDate: string
+  description: string
+  genres: string[]
+  duration: number
+  totalEpisodes: number
+  totalSeasons: number
+}
