@@ -1,10 +1,12 @@
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-import {createRef} from "react";
-import AnimeCard from "./AnimeCard.tsx";
-import {QueryPagePerPage} from "../../../redux/services/animeapi.ts";
+import {createRef, useState} from "react";
+import {QueryPagePerPage, useGetAnimeInfoQuery} from "../../../redux/services/animeapi.ts";
 import {UseQueryHookResult} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {BaseQueryFn, QueryDefinition} from "@reduxjs/toolkit/query";
 import {Box, CircularProgress} from "@mui/material";
+import ConfirmationModal from "../../../modal/ConfirmationModal.tsx";
+import AnimeCardModal from "./AnimeCardModal.tsx";
+import AnimeCard from "./AnimeCard.tsx";
 
 type AnimeCardRowProps = {
   query: (data : QueryPagePerPage) => UseQueryHookResult<QueryDefinition<QueryPagePerPage, BaseQueryFn, never, AnimeQueryType>>;
@@ -14,6 +16,10 @@ type AnimeCardRowProps = {
 
 export default function AnimeCardRow({ query, title, redirect } : AnimeCardRowProps) {
   const { data, isLoading } = query({ page: 1, perPage: 20 });
+
+  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [id, setId] = useState<string>("");
+
   const sliderRef = createRef<HTMLDivElement>();
 
   return (
@@ -37,8 +43,15 @@ export default function AnimeCardRow({ query, title, redirect } : AnimeCardRowPr
               onClick={(() => sliderRef.current!.scrollLeft -= 500)}
             />
             <div ref={sliderRef} className={"slider whitespace-nowrap overflow-x-scroll overflow-y-hidden scroll-smooth"}>
-              {data?.results.map((movie) => (
-                <AnimeCard {...movie} key={movie.id}/>
+              {data?.results.map((anime) => (
+                <AnimeCard
+                  key={anime.id}
+                  {...anime}
+                  onClick={() => {
+                    setId(anime.id);
+                    setConfirmationModal(true);
+                  }}
+                />
               ))}
             </div>
             <ChevronRight
@@ -48,6 +61,16 @@ export default function AnimeCardRow({ query, title, redirect } : AnimeCardRowPr
           </>
         )}
       </div>
+      {confirmationModal && id.length && (
+        <ConfirmationModal
+          isOpen={confirmationModal}
+          handleClose={() => {
+            setId("");
+            setConfirmationModal(false);
+          }}>
+          <AnimeCardModal query={useGetAnimeInfoQuery} id={id}/>
+        </ConfirmationModal>
+      )}
     </section>
   )
 }

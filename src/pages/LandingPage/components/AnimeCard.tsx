@@ -1,21 +1,21 @@
 import {Box} from "@mui/material";
 
 type AnimeCardType = {
-  id: string;
+  onClick: () => void;
   title: {
     romaji: string;
     english: string;
     native: string;
   };
   image: string;
-  type: string;
-  rating: number;
-  releaseDate: string;
 }
 
-export default function AnimeCard({title, image}: AnimeCardType) {
+export default function AnimeCard({title, image, onClick}: AnimeCardType) {
   return (
-      <Box className={"relative max-w-[200px] max-h-[300px] min-w-[150px] min-h-[200px] w-[20vw] h-[26vw] inline-block mr-2"}>
+      <Box
+        onClick={onClick}
+        className={"relative max-w-[200px] max-h-[300px] min-w-[150px] min-h-[200px] w-[20vw] h-[26vw] inline-block mr-2"}
+      >
         <img
           src={image}
           alt={title.english || title.romaji || title.native}

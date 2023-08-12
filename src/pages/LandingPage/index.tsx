@@ -12,7 +12,7 @@ const LandingPage = () => {
   return (
     <>
       <Hero/>
-      <Box className="pl-4 pr-4 relative z-10 xl:top-[-120px] lg:top-[-60px] top-[-50px]">
+      <Box className="pl-4 pr-4 relative">
         <AnimeCardRow query={useGetTrendingAnimeQuery} title={"Trending"} redirect={"/trending"}/>
         <AnimeCardRow query={useGetPopularAnimeQuery} title={"Popular"} redirect={"/popular"}/>
         <AnimeCardRow query={useGetAnimeRecentEpisodesQuery} title={"Latest Episodes"} redirect={"/latest"}/>
