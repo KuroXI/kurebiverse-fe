@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type QueryPagePerPage = {
-  page: string;
-  perPage: string;
+export type QueryPagePerPage = {
+  page: number | 1;
+  perPage: number | 20;
 };
 
 export const animeApi = createApi({

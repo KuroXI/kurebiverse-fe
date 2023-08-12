@@ -22,6 +22,7 @@ const TrendingPage = () => {
   useEffect(() => {
     if (inView && hasNextPage) fetchPosts();
   }, [inView]);
+  
   useLayoutEffect(() => fetchPosts, []);
 
   const theme = createTheme({
