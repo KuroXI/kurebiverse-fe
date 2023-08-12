@@ -2,11 +2,11 @@
   margin: 0;
 }
 
-.slick-track {
-  div {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
 }
