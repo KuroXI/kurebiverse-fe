@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { Navbar } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { LandingPage, TrendingPage } from "./pages";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
