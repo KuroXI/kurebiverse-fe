@@ -8,7 +8,7 @@ import {
 import { useEffect, useLayoutEffect, useState, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
 
-const LatestEpisodesPage = () => {
+const TrendingPage = () => {
   const [results, setResults] = useState<AnimeResultsType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
@@ -52,7 +52,7 @@ const LatestEpisodesPage = () => {
           "text-white font-bold xl:text-3xl lg:text-2xl mb-5 ml-5 mt-20"
         }
       >
-        Latest Episodes
+        Trending Anime
       </h3>
       <Box
         className={"m-5"}
@@ -108,4 +108,4 @@ const LatestEpisodesPage = () => {
   );
 };
 
-export { LatestEpisodesPage };
+export { TrendingPage };
