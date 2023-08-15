@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {AnimeInfo} from "../../type/AnimeInfo.ts";
 
-type QueryPagePerPage = {
-  page: string;
-  perPage: string;
+export type QueryPagePerPage = {
+  page: number | 1;
+  perPage: number | 20;
 };
 
 export const animeApi = createApi({
@@ -12,7 +13,7 @@ export const animeApi = createApi({
     getSearchAnime: builder.query<SearchType, string>({
       query: (searchString) => `/search/${searchString}`,
     }),
-    getAnimeInfo: builder.query({
+    getAnimeInfo: builder.query<AnimeInfo, string>({
       query: (animeId) => `/info/${animeId}`,
     }),
     getAnimeStreamingLinks: builder.query<WatchAnimeType, QueryPagePerPage>({

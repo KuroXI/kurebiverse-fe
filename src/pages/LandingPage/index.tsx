@@ -1,21 +1,24 @@
-import { Box } from "@mui/material";
-import Hero from "./components/Hero";
-import TrendingAnime from "./components/TrendingAnime";
-import PopularAnime from "./components/PopularAnime";
-import CurrentlyAiring from "./components/CurrentlyAiring";
+import {Box} from "@mui/material";
 import "./styles.scss";
+import Hero from "./components/Hero.tsx";
+import AnimeCardRow from "./components/AnimeCardRow.tsx";
+import {
+  useGetAnimeRecentEpisodesQuery,
+  useGetPopularAnimeQuery,
+  useGetTrendingAnimeQuery
+} from "../../redux/services/animeapi.ts";
 
 const LandingPage = () => {
   return (
-    <Box>
-      <Hero />
-      <Box className="xl:pl-16 md:pl-10 sm:pl-7 pl-4 relative z-10 xl:top-[-120px] lg:top-[-60px] top-[-50px]">
-        <TrendingAnime />
-        <PopularAnime />
-        <CurrentlyAiring />
+    <>
+      <Hero/>
+      <Box className="pl-4 pr-4 relative">
+        <AnimeCardRow query={useGetTrendingAnimeQuery} title={"Trending"} redirect={"/trending"}/>
+        <AnimeCardRow query={useGetPopularAnimeQuery} title={"Popular"} redirect={"/popular"}/>
+        <AnimeCardRow query={useGetAnimeRecentEpisodesQuery} title={"Latest Episodes"} redirect={"/latest"}/>
       </Box>
-    </Box>
+    </>
   );
 };
 
-export { LandingPage };
+export {LandingPage};
