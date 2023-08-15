@@ -145,7 +145,7 @@ type WatchAnimeType = {
     id: string;
     title: string;
     chapter: string;
-  };
+  }[];
 };
 
 type AnimeQueryType = {
@@ -222,4 +222,20 @@ type Translation = {
   title?: string;
   description?: string;
   language: string;
+};
+
+type EpisodeStreamType = {
+  headers: Headers;
+  sources: Source[];
+  download: string;
+};
+
+type Headers = {
+  Referer: string;
+};
+
+type Source = {
+  url: string;
+  isM3U8: boolean;
+  quality: string;
 };

@@ -1,4 +1,5 @@
-import { Navbar } from "./Navbar/index_bak.tsx";
+import { Navbar } from "./Navbar";
 import { SEO } from "./SEO";
+import { VideoPlayer } from "./VideoPlayer";
 
-export { Navbar, SEO };
+export { Navbar, SEO, VideoPlayer };
