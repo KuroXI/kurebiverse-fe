@@ -1,4 +1,5 @@
 import { LandingPage } from "./LandingPage";
-import { TrendingPage } from './TrendingPage';
+import { TrendingPage } from "./TrendingPage";
+import { PopularPage } from "./PopularPage";
 
-export { LandingPage, TrendingPage };
+export { LandingPage, TrendingPage, PopularPage };
