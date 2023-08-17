@@ -1,27 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {User} from "@supabase/supabase-js";
 
 type initStateType = {
-  name: string | null;
-  id: string | null;
-  photo: string | null;
+  user: User
 };
 
-const initialState: initStateType = {
-  name: null,
-  photo: null,
-  id: null,
-};
+const initialState: initStateType = {} as initStateType;
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     setUserDetails: (state, action) => {
-      state.name = action.payload.name;
-      state.id = action.payload.id;
-      state.photo = action.payload.photo;
-    },
-  },
+      state.user = action.payload.user;
+    }
+  }
 });
 
 export const { setUserDetails } = userSlice.actions;

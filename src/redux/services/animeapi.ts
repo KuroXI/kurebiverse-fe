@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type QueryPagePerPage = {
+export type QueryPagePerPage = {
   page: string;
   perPage: string;
 };

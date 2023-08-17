@@ -15,10 +15,10 @@ type AnimeCardRowProps = {
 }
 
 export default function AnimeCardRow({ query, title, redirect } : AnimeCardRowProps) {
-  const { data, isLoading } = query({ page: 1, perPage: 20 });
+  const { data, isLoading } = query({ page: "1", perPage: "20" });
 
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const [id, setId] = useState<string>("");
+  const [id, setId] = useState("");
 
   const sliderRef = createRef<HTMLDivElement>();
 

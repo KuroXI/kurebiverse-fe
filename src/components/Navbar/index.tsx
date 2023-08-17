@@ -1,13 +1,16 @@
 import {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import {Box, Button} from "@mui/material";
-import {AccountCircle, Cancel, Menu as MenuIcon, Search} from "@mui/icons-material";
-import {Input, IconButton, MenuHandler, Menu, MenuList, MenuItem} from "@material-tailwind/react";
+import {Cancel, Menu as MenuIcon, Search} from "@mui/icons-material";
+import {Input, IconButton} from "@material-tailwind/react";
 import kurebiimage from "../../assets/kurebiverse.png";
+import {LoggedIn, NotLoggedIn} from "./components/ProfileMenu.tsx";
+import {useSelector} from "react-redux";
+import {User} from "@supabase/supabase-js";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isNavbarSolid, setIsNavbarSolid] = useState(false);
+  const { user } = useSelector((state : { user: { user: User } }) => state.user);
 
   const handleMenuOpen = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -21,24 +24,10 @@ export function Navbar() {
     }
   }, [mobileMenuOpen]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const threshold = 50;
-      setIsNavbarSolid(scrollY > threshold);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <Box
       component={"nav"}
-      className={`md:fixed sticky top-0 left-0 z-[99] h-max w-screen rounded-none py-2 px-4 lg:py-3 ${
-        isNavbarSolid ? "bg-[#121212]/50 backdrop-blur-md" : "bg-transparent"
-      }`}>
+      className={`sticky top-0 left-0 z-[99] h-max w-screen rounded-none py-2 px-4 lg:py-3 bg-[#121212]/50 backdrop-blur-md`}>
       <Box className={"flex items-center justify-between"}>
         <Box className={"flex flex-row gap-4 items-center"}>
           <Box onClick={handleMenuOpen} className={"flex items-center text-white lg:text-3xl md:text-2xl text-xl"}>
@@ -55,7 +44,7 @@ export function Navbar() {
           </NavLink>
         </Box>
         <Box className={"flex flex-row gap-8 items-center "}>
-          <Box className={"relative flex w-full max-w-[45rem] md:visible invisible"}>
+          <Box className={"relative flex w-full max-w-[55rem] md:visible invisible"}>
             <Input
               label={"Search"}
               variant={"standard"}
@@ -67,20 +56,7 @@ export function Navbar() {
             </IconButton>
           </Box>
           <Box>
-            <Menu>
-              <MenuHandler>
-                <IconButton size={"lg"} variant={"text"} className={"rounded text-white"}>
-                  <AccountCircle />
-                </IconButton>
-              </MenuHandler>
-              <MenuList>
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>Watch List</MenuItem>
-                <MenuItem>Settings</MenuItem>
-                <hr className={"my-3"} />
-                <MenuItem className={"bg-red-700 text-white font-bold"}>Log Out</MenuItem>
-              </MenuList>
-            </Menu>
+            {user ? <LoggedIn/> : <NotLoggedIn/>}
           </Box>
         </Box>
         <Box
@@ -99,7 +75,7 @@ export function Navbar() {
                 <Search/>
               </IconButton>
             </Box>
-            <Box className={"flex flex-col justify-center items-center gap-7 mt-10 md:hidden"}>
+            <Box className={"flex flex-col justify-center items-center gap-7 mt-10"}>
               <NavLink to={"/"} onClick={handleMenuOpen}>
                 <Button className={"bg-[#222222] w-40"}>Recent Animes</Button>
               </NavLink>
