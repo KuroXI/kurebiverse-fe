@@ -7,19 +7,18 @@ import {Box, CircularProgress} from "@mui/material";
 import ConfirmationModal from "../../../modal/ConfirmationModal.tsx";
 import AnimeCardModal from "./AnimeCardModal.tsx";
 import AnimeCard from "./AnimeCard.tsx";
+import {AnimeSort} from "../../../type/AnimeSort.ts";
 
-type AnimeCardRowProps = {
-  query: (data : QueryPagePerPage) => UseQueryHookResult<QueryDefinition<QueryPagePerPage, BaseQueryFn, never, AnimeQueryType>>;
+type Props = {
+  query: (data : QueryPagePerPage) => UseQueryHookResult<QueryDefinition<QueryPagePerPage, BaseQueryFn, never, AnimeSort>>;
   title: string
   redirect: string
 }
 
-export default function AnimeCardRow({ query, title, redirect } : AnimeCardRowProps) {
-  const { data, isLoading } = query({ page: "1", perPage: "20" });
-
+export default function AnimeCardRow({ query, title, redirect } : Props) {
+  const { data, isLoading } = query({ page: 1, perPage: 20 });
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [id, setId] = useState("");
-
   const sliderRef = createRef<HTMLDivElement>();
 
   return (
