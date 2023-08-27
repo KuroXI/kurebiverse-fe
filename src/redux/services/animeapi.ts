@@ -21,7 +21,7 @@ export const animeApi = createApi({
     getAnimeInfo: builder.query<IAnime, string>({
       query: (animeId) => `/info/${animeId}`,
     }),
-    getAnimeEpisodes: builder.query<IEpisode, string>({
+    getAnimeEpisodes: builder.query<IEpisode[], string>({
       query: (animeId) => `/info/${animeId}/episodes`,
     }),
     getAnimeStreamingLinks: builder.query<ISource, string>({
@@ -58,4 +58,5 @@ export const {
   useGetPopularAnimeQuery,
   useGetRandomAnimeQuery,
   useGetTrendingAnimeQuery,
+  useGetAnimeEpisodesQuery,
 } = animeApi;

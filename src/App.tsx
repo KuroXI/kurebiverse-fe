@@ -31,7 +31,7 @@ function App() {
         <Route path="/trending" element={<TrendingPage />} />
         <Route path="/popular" element={<PopularPage />} />
         <Route path="/latest" element={<LatestEpisodesPage />} />
-        <Route path="/videotest/:animeId" element={<VideoPlayer />} />
+        <Route path="/watch/:animeId" element={<VideoPlayer />} />
         <Route path="/login" element={<Index />} />
       </Routes>
     </>
