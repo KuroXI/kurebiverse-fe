@@ -48,7 +48,7 @@ export default function AnimeCardRow({ query, title, redirect } : Props) {
                   key={anime.id}
                   {...anime}
                   onClick={() => {
-                    setId(anime.id);
+                    setId(String(anime.id));
                     setConfirmationModal(true);
                   }}
                 />
@@ -61,7 +61,7 @@ export default function AnimeCardRow({ query, title, redirect } : Props) {
           </>
         )}
       </div>
-      {confirmationModal && id.length && (
+      {confirmationModal && id.length > 0 && (
         <ConfirmationModal
           isOpen={confirmationModal}
           handleClose={() => {
