@@ -8,11 +8,18 @@ import {
 import { useEffect, useState, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
 import { IAnime } from "@kuroxi/kurebiverse-types";
+import ConfirmationModal from "../../components/modal/ConfirmationModal";
+import AnimeCardModal from "../LandingPage/components/AnimeCardModal";
+import { useGetAnimeInfoQuery } from "../../redux/services/animeapi";
+import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks";
+import { BaseQueryFn, QueryDefinition } from "@reduxjs/toolkit/dist/query";
 
 const PopularPage = () => {
   const [results, setResults] = useState<IAnime[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
+  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [id, setId] = useState("");
 
   const fetchPosts = useCallback( async () => {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/popular?page=${currentPage}&perPage=100`);
@@ -64,7 +71,10 @@ const PopularPage = () => {
         }}
       >
         {results.map((anime, index) => (
-          <ImageListItem key={`${index}-trending`}>
+          <ImageListItem key={`${index}-trending`} onClick={()=>{
+            setId(String(anime.id));
+            setConfirmationModal(true);
+          }}>
             <img
               src={`${anime.coverImage?.extraLarge}?w=300&h=400&fit=crop&auto=format&dpr=2`}
               alt={anime.title.english}
@@ -78,6 +88,17 @@ const PopularPage = () => {
       <div className={"justify-center flex mb-10"} ref={ref}>
         <CircularProgress/>
       </div>
+
+      {confirmationModal && id.length > 0 && (
+        <ConfirmationModal
+          isOpen={confirmationModal}
+          handleClose={() => {
+            setId("");
+            setConfirmationModal(false);
+          }}>
+          <AnimeCardModal query={useGetAnimeInfoQuery as (data: string) => UseQueryHookResult<QueryDefinition<string, BaseQueryFn, never, IAnime>>} id={id}/>
+        </ConfirmationModal>
+      )}
     </ThemeProvider>
   );
 };

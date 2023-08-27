@@ -4,11 +4,11 @@ import {QueryPagePerPage, useGetAnimeInfoQuery} from "../../../redux/services/an
 import {UseQueryHookResult} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import {BaseQueryFn, QueryDefinition} from "@reduxjs/toolkit/query";
 import {Box, CircularProgress} from "@mui/material";
-import ConfirmationModal from "../../../modal/ConfirmationModal.tsx";
+import ConfirmationModal from "../../../components/modal/ConfirmationModal.tsx";
 import AnimeCardModal from "./AnimeCardModal.tsx";
 import AnimeCard from "./AnimeCard.tsx";
 import {AnimeSort} from "../../../type/AnimeSort.ts";
-import { AnimeInfo } from "../../../type/AnimeInfo.ts";
+import { IAnime } from "@kuroxi/kurebiverse-types";
 
 type Props = {
   query: (data : QueryPagePerPage) => UseQueryHookResult<QueryDefinition<QueryPagePerPage, BaseQueryFn, never, AnimeSort>>;
@@ -68,7 +68,7 @@ export default function AnimeCardRow({ query, title, redirect } : Props) {
             setId("");
             setConfirmationModal(false);
           }}>
-          <AnimeCardModal query={useGetAnimeInfoQuery as (data: string) => UseQueryHookResult<QueryDefinition<string, BaseQueryFn, never, AnimeInfo>>} id={id}/>
+          <AnimeCardModal query={useGetAnimeInfoQuery as (data: string) => UseQueryHookResult<QueryDefinition<string, BaseQueryFn, never, IAnime>>} id={id}/>
         </ConfirmationModal>
       )}
     </section>
