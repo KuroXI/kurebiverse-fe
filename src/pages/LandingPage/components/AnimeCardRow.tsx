@@ -8,6 +8,7 @@ import ConfirmationModal from "../../../modal/ConfirmationModal.tsx";
 import AnimeCardModal from "./AnimeCardModal.tsx";
 import AnimeCard from "./AnimeCard.tsx";
 import {AnimeSort} from "../../../type/AnimeSort.ts";
+import { AnimeInfo } from "../../../type/AnimeInfo.ts";
 
 type Props = {
   query: (data : QueryPagePerPage) => UseQueryHookResult<QueryDefinition<QueryPagePerPage, BaseQueryFn, never, AnimeSort>>;
@@ -67,7 +68,7 @@ export default function AnimeCardRow({ query, title, redirect } : Props) {
             setId("");
             setConfirmationModal(false);
           }}>
-          <AnimeCardModal query={useGetAnimeInfoQuery} id={id}/>
+          <AnimeCardModal query={useGetAnimeInfoQuery as (data: string) => UseQueryHookResult<QueryDefinition<string, BaseQueryFn, never, AnimeInfo>>} id={id}/>
         </ConfirmationModal>
       )}
     </section>

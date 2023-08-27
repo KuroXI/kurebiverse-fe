@@ -4,7 +4,7 @@ import { Info, PlayArrow } from "@mui/icons-material";
 
 export default function Hero() {
   const { data, isLoading } = useGetRandomAnimeQuery(null);
-
+  
   if (data === null) window.location.reload();
 
   return isLoading ? (
@@ -17,18 +17,18 @@ export default function Hero() {
     <header
       className={"relative xl:h-[80vh] lg:h-[70vh] md:h-[60vh] sm:h-[50vh] h-[40vh] text-white object-contain"}
       style={{
-        backgroundImage: `url(${data?.cover || data?.image})`,
+        backgroundImage: `url(${data?.bannerImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center top",
       }}
     >
       <Box className="absolute xl:pl-16 md:pl-10 sm:pl-7 pl-4 text-xl md:pt-[170px] pt-[100px]">
-        <h2 className="font-bold xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl">{data?.title}</h2>
+        <h2 className="font-bold xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl">{data?.title?.english}</h2>
         <Box className="xl:text-xl lg:text-lg md:text-md sm:text-sm text-xs">
           <Box className="flex gap-5 my-3">
-            <p className="text-[#6adf34] font-bold">{data?.rating} Rating</p>
-            <p>{data?.releaseDate}</p>
-            <p>{data?.totalEpisodes || 1} episode(s)</p>
+            <p className="text-[#6adf34] font-bold">{(data?.averageScore as number / 10).toFixed(1)} Rating</p>
+            <p>{data?.startDate.year}</p>
+            <p>{data?.episodes || 1} episode(s)</p>
           </Box>
           <p className="xl:w-1/2 md:w-2/4 w-3/4 line-clamp-3">{data?.description}</p>
         </Box>
