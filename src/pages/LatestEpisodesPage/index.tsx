@@ -67,7 +67,7 @@ const LatestEpisodesPage = () => {
           <ImageListItem key={`${index}-trending`}>
             <img
               src={`${anime.coverImage?.extraLarge}?w=300&h=400&fit=crop&auto=format&dpr=2`}
-              alt={anime.title.english}
+              alt={anime?.title.english || anime?.title.userPreferred || anime?.title.romaji || anime?.title.native}
               loading="lazy"
               className={"cursor-pointer rounded-md"}
             />
