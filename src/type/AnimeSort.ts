@@ -1,7 +1,9 @@
+import { IAnime } from "@kuroxi/kurebiverse-types"
+
 export type AnimeSort = {
   currentPage: number
   hasNextPage: boolean
-  results: AnimeSortResult[]
+  results: IAnime[]
 }
 
 export type AnimeSortResult = {

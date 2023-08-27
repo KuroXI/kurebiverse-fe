@@ -5,25 +5,21 @@ import {
   imageListItemClasses,
   ThemeProvider,
 } from "@mui/material";
-import { useEffect, useLayoutEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
-import {AnimeSort, AnimeSortResult} from "../../type/AnimeSort.ts";
+import { IAnime } from "@kuroxi/kurebiverse-types";
 
 const TrendingPage = () => {
-  const [results, setResults] = useState<AnimeSortResult[]>([]);
+  const [results, setResults] = useState<IAnime[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasNextPage, setHasNextPage] = useState(false);
+  const [hasNextPage, setHasNextPage] = useState(true);
 
-  const fetchPosts = useCallback(() => {
-    fetch(
-      `https://kurebiverse-be.vercel.app/trending?page=${currentPage}&perPage=100`
-    )
-      .then((response) => response.json())
-      .then((data: AnimeSort) => {
-        setCurrentPage(data.currentPage + 1);
-        setResults((prev) => [...prev, ...data.results]);
-        setHasNextPage(data.hasNextPage);
-      });
+  const fetchPosts = useCallback( async () => {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/trending?page=${currentPage}&perPage=100`);
+    const data = await response.json();
+    setCurrentPage(data.currentPage + 1);
+    setResults((prev) => [...prev, ...data.results]);
+    setHasNextPage(data.hasNextPage);
   }, [currentPage]);
 
   const { ref, inView } = useInView();
@@ -31,8 +27,6 @@ const TrendingPage = () => {
   useEffect(() => {
     if (inView && hasNextPage) fetchPosts();
   }, [inView, fetchPosts, hasNextPage]);
-
-  useLayoutEffect(() => fetchPosts, [fetchPosts]);
 
   const theme = createTheme({
     breakpoints: {
@@ -72,7 +66,7 @@ const TrendingPage = () => {
         {results.map((anime, index) => (
           <ImageListItem key={`${index}-trending`}>
             <img
-              src={`${anime.image}?w=300&h=400&fit=crop&auto=format&dpr=2`}
+              src={`${anime.coverImage?.extraLarge}?w=300&h=400&fit=crop&auto=format&dpr=2`}
               alt={anime.title.english}
               loading="lazy"
               className={"cursor-pointer rounded-md"}
