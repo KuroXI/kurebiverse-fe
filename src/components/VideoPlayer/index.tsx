@@ -1,10 +1,12 @@
-import { Box, Button } from "@mui/material";
-import ReactPlayer from "react-player";
-import { useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
-import { useGetAnimeEpisodesQuery } from "../../redux/services/animeapi";
 import axios from "../../api/axios";
 import { IEpisode } from "@kuroxi/kurebiverse-types";
+import "vidstack/styles/defaults.css";
+import "vidstack/styles/community-skin/video.css";
+
+import { MediaCommunitySkin, MediaOutlet, MediaPlayer } from "@vidstack/react";
 
 const VideoPlayer = () => {
   const { animeId } = useParams();
@@ -13,54 +15,79 @@ const VideoPlayer = () => {
 
   const fetchEpisode = useCallback(async () => {
     if (animeId) {
-      console.log("DONE ONCE");
+      const url = new URL(window.location.href);
+      const params = new URLSearchParams(url.search);
+      let episodeId = "";
+      if (params) {
+        episodeId = params.get("episode") as string;
+      }
+
       const responseAnimeEpisodes = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/info/${animeId}/episodes`
       );
       const dataResponseAnimeEpisodes = await responseAnimeEpisodes.data;
-      setAnimeData(dataResponseAnimeEpisodes);
+      setAnimeData(dataResponseAnimeEpisodes.reverse());
 
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/episode/${
-          dataResponseAnimeEpisodes[dataResponseAnimeEpisodes.length - 1].id
-        }`
-      );
+      if (episodeId) {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/episode/${episodeId}`
+        );
 
-      const dataResponse = await response.data;
-      const getDefault = dataResponse.sources;
-      let defaultKey = "";
-      for (let key in getDefault) {
-        if (getDefault[key].quality === "default") {
-          defaultKey = key;
+        const dataResponse = await response.data;
+        const getDefault = dataResponse.sources;
+        let defaultKey = "";
+        for (let key in getDefault) {
+          if (getDefault[key].quality === "default") {
+            defaultKey = key;
+          }
         }
+        setVideoUrl(getDefault[defaultKey].url);
+      } else {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/episode/${
+            dataResponseAnimeEpisodes[dataResponseAnimeEpisodes.length - 1].id
+          }`
+        );
+
+        const dataResponse = await response.data;
+        const getDefault = dataResponse.sources;
+        let defaultKey = "";
+        for (let key in getDefault) {
+          if (getDefault[key].quality === "default") {
+            defaultKey = key;
+          }
+        }
+
+        setVideoUrl(getDefault[defaultKey].url);
       }
-      setVideoUrl(getDefault[defaultKey].url);
     }
   }, [animeId]);
 
   useEffect(() => {
     fetchEpisode();
     return () => {
-      setAnimeData([]);
       setVideoUrl("");
+      setAnimeData([]);
     };
-  }, [fetchEpisode]);
+  }, [fetchEpisode, window.location.href]);
 
   return (
     <Box>
-      {videoUrl.length > 0 && (
-        <ReactPlayer
-          url={videoUrl}
-          width={"100vw"}
-          height={"100vh"}
-          controls={true}
-        />
-      )}
-      {animeData?.map((episode) => {
+      <MediaPlayer
+        key={videoUrl + Date.now()}
+        src={videoUrl}
+        aspectRatio={16 / 9}
+      >
+        <MediaOutlet className="relative"></MediaOutlet>
+        <MediaCommunitySkin />
+      </MediaPlayer>
+      {animeData?.map((episode, index) => {
         return (
           <Box key={episode.title}>
             <img src={episode.image} alt={episode.title} className="" />
-            <Button>Watch</Button>
+            <Link to={`/watch/${animeId}?episode=${episode.id}`}>
+              Watch Episode {index + 1}
+            </Link>
           </Box>
         );
       })}
