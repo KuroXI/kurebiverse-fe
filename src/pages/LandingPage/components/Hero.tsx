@@ -21,7 +21,8 @@ export default function Hero() {
         backgroundSize: "cover",
         backgroundPosition: "center top",
       }}
-    >
+      >
+      <Box className="h-full w-[100vw] pointer-events-none bg-gradient-to-l z-0 absolute from-transparent to-[#141414]" />
       <Box className="absolute xl:pl-16 md:pl-10 sm:pl-7 pl-4 text-xl md:pt-[170px] pt-[100px]">
         <h2 className="font-bold xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl">{data?.title?.english}</h2>
         <Box className="xl:text-xl lg:text-lg md:text-md sm:text-sm text-xs">
@@ -30,7 +31,7 @@ export default function Hero() {
             <p>{data?.startDate.year}</p>
             <p>{data?.episodes || 1} episode(s)</p>
           </Box>
-          <p className="xl:w-1/2 md:w-2/4 w-3/4 line-clamp-3">{data?.description}</p>
+          <p className="xl:w-2/5 md:w-2/4 w-3/4 line-clamp-3">{data?.description}</p>
         </Box>
         <Box className="flex justify-start items-center text-center gap-5 md:mt-10 mt-5">
           <button className="xl:px-10 xl:py-5 lg:px-7 lg:py-4 px-4 py-2 bg-white rounded-sm font-bold">
