@@ -44,7 +44,7 @@ const VideoPlayer = () => {
       } else {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/episode/${
-            dataResponseAnimeEpisodes[dataResponseAnimeEpisodes.length - 1].id
+            dataResponseAnimeEpisodes[0].id
           }`
         );
 
