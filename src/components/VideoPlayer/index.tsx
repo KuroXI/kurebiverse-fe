@@ -25,7 +25,7 @@ const VideoPlayer = () => {
         `${import.meta.env.VITE_BASE_URL}/info/${animeId}/episodes`
       );
       const dataResponseAnimeEpisodes = await responseAnimeEpisodes.data;
-      setAnimeData(dataResponseAnimeEpisodes);
+      setAnimeData(dataResponseAnimeEpisodes.reverse());
 
       if (episodeId) {
         const response = await axios.get(
