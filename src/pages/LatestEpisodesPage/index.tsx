@@ -85,9 +85,11 @@ const LatestEpisodesPage = () => {
         ))}
       </Box>
 
-      <div className={"justify-center flex mb-10"} ref={ref}>
-        <CircularProgress/>
-      </div>
+      {hasNextPage && (
+        <div className={"justify-center flex mb-10"} ref={ref}>
+          <CircularProgress />
+        </div>
+      )}
       
       {confirmationModal && id.length > 0 && (
         <ConfirmationModal

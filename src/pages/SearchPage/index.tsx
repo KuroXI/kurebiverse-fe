@@ -1,5 +1,6 @@
 import {
-  Box, CircularProgress,
+  Box,
+  CircularProgress,
   createTheme,
   ImageListItem,
   imageListItemClasses,
@@ -13,27 +14,37 @@ import AnimeCardModal from "../LandingPage/components/AnimeCardModal";
 import { useGetAnimeInfoQuery } from "../../redux/services/animeapi";
 import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { BaseQueryFn, QueryDefinition } from "@reduxjs/toolkit/dist/query";
+import { useParams } from "react-router-dom";
 
-const TrendingPage = () => {
+const SearchPage = () => {
+  const { searchQuery } = useParams();
   const [results, setResults] = useState<IAnime[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [id, setId] = useState("");
 
-  const fetchPosts = useCallback( async () => {
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/trending?page=${currentPage}&perPage=100`);
+  const fetchPosts = useCallback(async () => {
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/search/${searchQuery}`
+    );
     const data = await response.json();
     setCurrentPage(data.currentPage + 1);
     setResults((prev) => [...prev, ...data.results]);
     setHasNextPage(data.hasNextPage);
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   const { ref, inView } = useInView();
 
   useEffect(() => {
     if (inView && hasNextPage) fetchPosts();
   }, [inView, fetchPosts, hasNextPage]);
+
+  useEffect(() => {
+    setResults([]);
+    setCurrentPage(1);
+    setHasNextPage(true);
+  }, [searchQuery]);
 
   const theme = createTheme({
     breakpoints: {
@@ -49,8 +60,12 @@ const TrendingPage = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <h3 className={"text-white font-bold xl:text-3xl lg:text-2xl mb-5 ml-5 mt-20"}>
-        Trending Anime
+      <h3
+        className={
+          "text-white font-bold xl:text-3xl lg:text-2xl mb-5 ml-5 mt-20"
+        }
+      >
+        Searched Anime
       </h3>
       <Box
         className={"m-5"}
@@ -71,10 +86,13 @@ const TrendingPage = () => {
         }}
       >
         {results.map((anime, index) => (
-          <ImageListItem key={`${index}-trending`} onClick={()=>{
-            setId(String(anime.id));
-            setConfirmationModal(true);
-          }}>
+          <ImageListItem
+            key={`${index}-trending`}
+            onClick={() => {
+              setId(String(anime.id));
+              setConfirmationModal(true);
+            }}
+          >
             <img
               src={`${anime.coverImage?.extraLarge}?w=300&h=400&fit=crop&auto=format&dpr=2`}
               alt={anime.title.english}
@@ -97,12 +115,22 @@ const TrendingPage = () => {
           handleClose={() => {
             setId("");
             setConfirmationModal(false);
-          }}>
-          <AnimeCardModal query={useGetAnimeInfoQuery as (data: string) => UseQueryHookResult<QueryDefinition<string, BaseQueryFn, never, IAnime>>} id={id}/>
+          }}
+        >
+          <AnimeCardModal
+            query={
+              useGetAnimeInfoQuery as (
+                data: string
+              ) => UseQueryHookResult<
+                QueryDefinition<string, BaseQueryFn, never, IAnime>
+              >
+            }
+            id={id}
+          />
         </ConfirmationModal>
       )}
     </ThemeProvider>
   );
 };
 
-export { TrendingPage };
+export { SearchPage };
