@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IResult, IAnime, IEpisode, ISource, IAiringSchedule } from "@kuroxi/kurebiverse-types";
+import {
+  IResult,
+  IAnime,
+  IEpisode,
+  ISource,
+  IAiringSchedule,
+} from "@kuroxi/kurebiverse-types";
 
 export type QueryPagePerPage = {
   page: number;
@@ -7,8 +13,8 @@ export type QueryPagePerPage = {
 };
 
 export interface AiringScheduleQuery extends QueryPagePerPage {
-  airingAtLesser: number
-  airingAtGreater: number
+  airingAtLesser: number;
+  airingAtGreater: number;
 }
 
 export const animeApi = createApi({
@@ -40,7 +46,7 @@ export const animeApi = createApi({
         `/popular?page=${page}&perPage=${perPage}`,
     }),
     getAiringSchedule: builder.query<IAiringSchedule, AiringScheduleQuery>({
-      query: ({ page, perPage, airingAtGreater, airingAtLesser}) =>
+      query: ({ page, perPage, airingAtGreater, airingAtLesser }) =>
         `/schedule?page=${page}&perPage=${perPage}&airingAtGreater=${airingAtGreater}&airingAtLesser=${airingAtLesser}`,
     }),
     getRandomAnime: builder.query<IAnime, unknown>({
