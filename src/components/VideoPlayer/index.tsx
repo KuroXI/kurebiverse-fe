@@ -5,7 +5,6 @@ import axios from "../../api/axios";
 import { IEpisode } from "@kuroxi/kurebiverse-types";
 import "vidstack/styles/defaults.css";
 import "vidstack/styles/community-skin/video.css";
-
 import { MediaCommunitySkin, MediaOutlet, MediaPlayer } from "@vidstack/react";
 
 const VideoPlayer = () => {
@@ -67,7 +66,6 @@ const VideoPlayer = () => {
     fetchEpisode();
     return () => {
       setVideoUrl("");
-      setAnimeData([]);
     };
   }, [fetchEpisode, window.location.href]);
 
@@ -85,7 +83,16 @@ const VideoPlayer = () => {
         return (
           <Box key={episode.title}>
             <img src={episode.image} alt={episode.title} className="" />
-            <Link to={`/watch/${animeId}?episode=${episode.id}`}>
+            <Link
+              to={`/watch/${animeId}?episode=${episode.id}`}
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                })
+              }
+            >
               Watch Episode {index + 1}
             </Link>
           </Box>
