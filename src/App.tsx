@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { LandingPage, PopularPage, TrendingPage } from "./pages";
+import { LandingPage, PopularPage, SearchPage, TrendingPage } from "./pages";
 import { Navbar, VideoPlayer } from "./components";
 import { LatestEpisodesPage } from "./pages";
 import Index from "./components/Auth";
@@ -32,6 +32,7 @@ function App() {
         <Route path="/popular" element={<PopularPage />} />
         <Route path="/latest" element={<LatestEpisodesPage />} />
         <Route path="/watch/:animeId" element={<VideoPlayer />} />
+        <Route path="/search/:searchQuery" element={<SearchPage />} />
         <Route path="/login" element={<Index />} />
       </Routes>
     </>
