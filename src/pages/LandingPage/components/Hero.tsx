@@ -1,10 +1,11 @@
 import { Box, CircularProgress } from "@mui/material";
 import { useGetRandomAnimeQuery } from "../../../redux/services/animeapi";
 import { Info, PlayArrow } from "@mui/icons-material";
+import {proxyImage} from "../../../lib/utils.ts";
 
 export default function Hero() {
   const { data, isLoading } = useGetRandomAnimeQuery(null);
-  
+
   if (data === null) window.location.reload();
 
   return isLoading ? (
@@ -17,7 +18,7 @@ export default function Hero() {
     <header
       className={"relative xl:h-[80vh] lg:h-[70vh] md:h-[60vh] sm:h-[50vh] h-[40vh] text-white object-contain"}
       style={{
-        backgroundImage: `url(${data?.bannerImage})`,
+        backgroundImage: `url(${proxyImage(data?.bannerImage)})`,
         backgroundSize: "cover",
         backgroundPosition: "center top",
       }}

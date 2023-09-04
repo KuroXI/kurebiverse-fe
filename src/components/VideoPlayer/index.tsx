@@ -7,6 +7,7 @@ import "vidstack/styles/community-skin/video.css";
 import { MediaCommunitySkin, MediaOutlet, MediaPlayer } from "@vidstack/react";
 import { useGetAnimeEpisodesQuery } from "../../redux/services/animeapi";
 import { PlayArrow } from "@mui/icons-material";
+import {proxyImage, proxyM3U8} from "../../lib/utils.ts";
 
 const VideoPlayer = () => {
   const { animeId } = useParams();
@@ -30,7 +31,7 @@ const VideoPlayer = () => {
         const dataResponse = await response.data;
         const getDefault = dataResponse.sources;
         let defaultKey = "";
-        for (let key in getDefault) {
+        for (const key in getDefault) {
           if (getDefault[key].quality === "default") {
             defaultKey = key;
           }
@@ -44,7 +45,7 @@ const VideoPlayer = () => {
         const dataResponse = await response.data;
         const getDefault = dataResponse.sources;
         let defaultKey = "";
-        for (let key in getDefault) {
+        for (const key in getDefault) {
           if (getDefault[key].quality === "default") {
             defaultKey = key;
           }
@@ -65,12 +66,10 @@ const VideoPlayer = () => {
   return (
     <Box className="flex max-h-[92vh] overflow-hidden">
       <Box className="w-[80vw]">
-        <MediaPlayer
-          key={videoUrl + Date.now()}
-          src={videoUrl}
-          aspectRatio={16 / 9}
-        >
-          <MediaOutlet className="relative"></MediaOutlet>
+        <MediaPlayer key={videoUrl + Date.now()} aspectRatio={16 / 9}>
+          <MediaOutlet className="relative">
+            <source src={proxyM3U8(videoUrl)} type={"application/x-mpegurl"}/>
+          </MediaOutlet>
           <MediaCommunitySkin />
         </MediaPlayer>
       </Box>
@@ -114,7 +113,7 @@ const VideoPlayer = () => {
                   }}
                 >
                   <img
-                    src={episode.image}
+                    src={proxyImage(episode.image)}
                     alt={episode.title}
                     className="w-[150px] mr-3 transition-opacity duration-300"
                   />

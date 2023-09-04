@@ -13,6 +13,7 @@ import AnimeCardModal from "../LandingPage/components/AnimeCardModal";
 import { useGetAnimeInfoQuery } from "../../redux/services/animeapi";
 import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { BaseQueryFn, QueryDefinition } from "@reduxjs/toolkit/dist/query";
+import {proxyImage} from "../../lib/utils.ts";
 
 const PopularPage = () => {
   const [results, setResults] = useState<IAnime[]>([]);
@@ -76,7 +77,7 @@ const PopularPage = () => {
             setConfirmationModal(true);
           }}>
             <img
-              src={`${anime.coverImage?.extraLarge}?w=300&h=400&fit=crop&auto=format&dpr=2`}
+              src={proxyImage(anime.coverImage?.extraLarge)}
               alt={anime.title.english}
               loading="lazy"
               className={"cursor-pointer rounded-md"}
