@@ -13,6 +13,7 @@ import AnimeCardModal from "../LandingPage/components/AnimeCardModal";
 import { useGetAnimeInfoQuery } from "../../redux/services/animeapi";
 import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { BaseQueryFn, QueryDefinition } from "@reduxjs/toolkit/dist/query";
+import {proxyImage} from "../../lib/utils.ts";
 
 const LatestEpisodesPage = () => {
   const [results, setResults] = useState<IAnime[]>([]);
@@ -76,7 +77,7 @@ const LatestEpisodesPage = () => {
             setConfirmationModal(true);
           }}>
             <img
-              src={`${anime.coverImage?.extraLarge}?w=300&h=400&fit=crop&auto=format&dpr=2`}
+              src={proxyImage(anime.coverImage?.extraLarge)}
               alt={anime?.title.english || anime?.title.userPreferred || anime?.title.romaji || anime?.title.native}
               loading="lazy"
               className={"cursor-pointer rounded-md"}
@@ -90,7 +91,7 @@ const LatestEpisodesPage = () => {
           <CircularProgress />
         </div>
       )}
-      
+
       {confirmationModal && id.length > 0 && (
         <ConfirmationModal
           isOpen={confirmationModal}
