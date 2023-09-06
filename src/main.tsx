@@ -6,6 +6,7 @@ import { store } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import "./global.scss";
+import {ThemeProvider} from "@/components/ui/theme-provider.tsx";
 
 const helmetContext = {};
 
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <HelmetProvider context={helmetContext}>
         <BrowserRouter>
-          <App />
+          <ThemeProvider defaultTheme={"dark"}>
+            <App />
+          </ThemeProvider>
         </BrowserRouter>
       </HelmetProvider>
     </Provider>

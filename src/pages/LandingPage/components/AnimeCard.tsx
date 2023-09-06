@@ -1,6 +1,6 @@
 import { ICoverImage, ITitle } from "@kuroxi/kurebiverse-types";
 import {Box} from "@mui/material";
-import {proxyImage} from "../../../lib/utils.ts";
+import {proxyImage} from "@/lib/utils.ts";
 
 type AnimeCardType = {
   onClick: () => void;

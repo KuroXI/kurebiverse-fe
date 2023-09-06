@@ -1,74 +1,56 @@
 import { Box, CircularProgress } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import axios from "../../api/axios";
 import "vidstack/styles/defaults.css";
 import "vidstack/styles/community-skin/video.css";
-import { MediaCommunitySkin, MediaOutlet, MediaPlayer } from "@vidstack/react";
-import { useGetAnimeEpisodesQuery } from "../../redux/services/animeapi";
+import {MediaCommunitySkin, MediaOutlet, MediaPlayer} from "@vidstack/react";
+import { useGetAnimeEpisodesQuery } from "@/redux/services/animeapi.ts";
 import { PlayArrow } from "@mui/icons-material";
-import {proxyImage, proxyM3U8} from "../../lib/utils.ts";
+import {proxyImage} from "@/lib/utils.ts";
 
 const VideoPlayer = () => {
   const { animeId } = useParams();
   const { data, isLoading } = useGetAnimeEpisodesQuery(animeId as string);
   const [videoUrl, setVideoUrl] = useState<string>("");
 
-  const fetchEpisode = useCallback(async () => {
+  const fetchEpisode = useCallback(() => {
     if (animeId && data) {
       const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      let episodeId = "";
-      if (params) {
-        episodeId = params.get("episode") as string;
-      }
+      const episodeIdParams = new URLSearchParams(url.search).get("episode") as string;
+      const episodeId = episodeIdParams || data[0].id;
 
-      if (episodeId) {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/episode/${episodeId}`
+      axios.get(`${import.meta.env.VITE_BASE_URL}/episode/${episodeId}`).then(({ data }) => {
+        const defaultSource = data.sources.filter(
+          (source: { quality: string; }) => source.quality === "default"
         );
 
-        const dataResponse = await response.data;
-        const getDefault = dataResponse.sources;
-        let defaultKey = "";
-        for (const key in getDefault) {
-          if (getDefault[key].quality === "default") {
-            defaultKey = key;
-          }
-        }
-        setVideoUrl(getDefault[defaultKey].url);
-      } else {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/episode/${data[0].id}`
-        );
-
-        const dataResponse = await response.data;
-        const getDefault = dataResponse.sources;
-        let defaultKey = "";
-        for (const key in getDefault) {
-          if (getDefault[key].quality === "default") {
-            defaultKey = key;
-          }
-        }
-
-        setVideoUrl(getDefault[defaultKey].url);
-      }
+        setVideoUrl(defaultSource[0].url);
+      })
     }
   }, [animeId, data]);
 
   useEffect(() => {
     fetchEpisode();
-    return () => {
-      setVideoUrl("");
-    };
-  }, [fetchEpisode, window.location.href, data]);
+    return () => setVideoUrl("");
+  }, [fetchEpisode, data]);
+
+  function onEnd() {
+    console.log("video ended");
+  }
 
   return (
     <Box className="flex max-h-[92vh] overflow-hidden">
       <Box className="w-[80vw]">
-        <MediaPlayer key={videoUrl + Date.now()} aspectRatio={16 / 9}>
+        <MediaPlayer
+          key={videoUrl + Date.now()}
+          aspectRatio={16 / 9}
+          load={"idle"}
+          crossorigin={"anonymous"}
+          onEnd={onEnd}
+        >
           <MediaOutlet className="relative">
-            <source src={proxyM3U8(videoUrl)} type={"application/x-mpegurl"}/>
+            <source src={videoUrl} type={"application/x-mpegurl"}/>
           </MediaOutlet>
           <MediaCommunitySkin />
         </MediaPlayer>
