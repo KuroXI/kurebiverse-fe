@@ -1,6 +1,6 @@
 import {Auth} from "@supabase/auth-ui-react";
 import {ThemeSupa} from "@supabase/auth-ui-shared";
-import {supabase} from "../../redux/auth/supabase.ts";
+import {supabase} from "@/redux/auth/supabase.ts";
 import {Box} from "@mui/material";
 
 export default function Index() {
