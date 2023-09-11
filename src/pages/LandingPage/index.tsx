@@ -16,7 +16,7 @@ import {useSelector} from "react-redux";
 import {User} from "@supabase/supabase-js";
 import {useEffect, useState} from "react";
 import {supabase} from "@/redux/auth/supabase.ts";
-import {History, HistoryResult} from "@/type/History.ts";
+import {History} from "@/type/History.ts";
 
 const LandingPage = () => {
   const [history, setHistory] = useState<History[] | null>(null);
@@ -24,9 +24,8 @@ const LandingPage = () => {
 
   useEffect(() => {
     if (user) {
-      supabase.from("history").select("*").then(({ data } : { data: HistoryResult[] | null }) => {
-        if (data) setHistory(data[0].history);
-      })
+      supabase.from("histories").select("*")
+        .then(({ data } : { data: History[] | null }) => setHistory(data))
     }
   }, [user]);
 
