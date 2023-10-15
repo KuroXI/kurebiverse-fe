@@ -30,12 +30,12 @@ export default function ConfirmationModal({ children, isOpen, handleClose } : Co
 
   return (
     <ReactPortal wrapperId={"modal-manga-information"}>
-      <Box className={"z-50 transition duration-300 flex justify-center items-center overflow-hidden fixed inset-0"}>
+      <Box className={"z-50 transition duration-300 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0"}>
         <Box
           onClick={handleClose}
           className="fixed inset-0 backdrop-blur-[2px] transition-opacity"
         />
-        <Box className={"relative w-auto x-auto max-w-3xl rounded-md bg-[#141414]"}>
+        <Box className={"relative w-auto x-auto max-w-3xl rounded-md overflow-x-hidden overflow-y-scroll bg-[#141414]"}>
           <Box className={"transform duration-300 relative flex-auto bg-white drop-shadow-md"}>
             <Box className={"relative max-h-[700px] bg-[#141414]"}>
               <Close
