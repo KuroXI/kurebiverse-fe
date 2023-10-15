@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {User} from "@supabase/supabase-js";
-
-type initStateType = {
-  user: User
-};
+import { initStateType } from "@/type/Redux";
 
 const initialState: initStateType = {} as initStateType;
 
@@ -12,9 +8,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserDetails: (state, action) => {
-      state.user = action.payload.user;
-    }
-  }
+      state.userId = action.payload.userId;
+      state.username = action.payload.username;
+      state.profileUrl = action.payload.profileUrl;
+      state.coverUrl = action.payload.coverUrl;
+      state.email = action.payload.email;
+    },
+  },
 });
 
 export const { setUserDetails } = userSlice.actions;
