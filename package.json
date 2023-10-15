@@ -42,7 +42,8 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "vidstack": "^0.6.13",
-    "vite-plugin-pwa": "^0.16.5"
+    "vite-plugin-pwa": "^0.16.5",
+    "workbox-webpack-plugin": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
