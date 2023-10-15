@@ -3,6 +3,7 @@ import { BaseQueryFn, QueryDefinition } from "@reduxjs/toolkit/query";
 import { Add, PlayArrow } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { IAnime } from "@/type/Anime";
+import { cleanDescription } from "@/lib/utils";
 
 type AnimeCardModalProps = {
 	query: (data: string) => UseQueryHookResult<QueryDefinition<string, BaseQueryFn, never, IAnime>>;
@@ -50,7 +51,7 @@ export default function AnimeCardModal({ id, query }: AnimeCardModalProps) {
 						<p className={"text-white pr-5 text-center font-bold"}>{data?.startDate.year}</p>
 					</div>
 					<p className={"text-white line-clamp-[7] lg:text-md md:text-sm text-sx"}>
-						{data?.description?.replace(/\(Source:[\s\S]*$/g, "").replace(/<[^>]*>/g, "")}
+						{cleanDescription(data?.description || "")}
 					</p>
 				</div>
 				<div className={"lg:text-md md:text-sm text-sx"}>
