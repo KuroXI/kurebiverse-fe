@@ -4,7 +4,6 @@ import {cleanDescription, proxyImage} from "@/lib/utils.ts";
 import {Badge} from "@/components/ui/badge.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Bookmark, PlayCircle} from "lucide-react";
-import { Link } from "react-router-dom";
 
 export default function Hero() {
   const { data, isLoading } = useGetRandomAnimeQuery(null);
@@ -34,8 +33,8 @@ export default function Hero() {
           {data?.title.english || data?.title.userPreferred || data?.title.romaji || data?.title.native}
         </h1>
         <div className={"flex flex-wrap overflow-hidden gap-x-2 gap-y-1"}>
-          {data?.genres.map((genre, index) => (
-            <Badge key={`genre-${index}`} variant={"secondary"} className={"font-light text-sm"}>{genre}</Badge>
+          {data?.genres.map((genre) => (
+            <Badge variant={"secondary"} className={"font-light text-sm"}>{genre}</Badge>
           ))}
         </div>
         { data?.description && (
@@ -44,12 +43,10 @@ export default function Hero() {
           </h1>
         )}
         <div className={"flex md:gap-5 gap-2"}>
-          <Link to={`/watch/${data?.id}?episodeNumber=1`}>
-            <Button className={"flex gap-1 text-sm font-medium text-primary-foreground"}>
-              <PlayCircle/>
-              Play Now
-            </Button>
-          </Link>
+          <Button className={"flex gap-1 text-sm font-medium text-primary-foreground"}>
+            <PlayCircle/>
+            Play Now
+          </Button>
           <Button variant={"secondary"} className={"flex gap-1 text-sm font-medium"}>
             <Bookmark/>
             Add Watchlist
