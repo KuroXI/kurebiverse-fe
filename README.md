@@ -58,7 +58,6 @@ Kurebiverse frontend relies on the following dependencies:
 
 - `@emotion/react`
 - `@emotion/styled`
-- `@kuroxi/kurebiverse-types`
 - `@material-tailwind/react`
 - `@mui/icons-material`
 - `@mui/material`
