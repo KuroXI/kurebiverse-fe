@@ -1,20 +1,13 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
 import path from "path";
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA()],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        format: 'esm',
-      },
-    },
-  },
-});
+})
