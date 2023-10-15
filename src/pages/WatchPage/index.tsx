@@ -10,6 +10,8 @@ import { Box, CircularProgress } from "@mui/material";
 import { useLocation, useParams } from "react-router-dom";
 import EpisodeLinks from "./components/EpisodeLinks";
 import { cleanDescription } from "@/lib/utils";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import Comments from "./components/Comments";
 
 const WatchPage = () => {
   const { animeId } = useParams();
@@ -18,16 +20,11 @@ const WatchPage = () => {
     useGetAnimeInfoQuery(animeId as string);
   const [videoUrl, setVideoUrl] = useState<string>("");
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
-  const episodeIdParams =
-    new URLSearchParams(location.search).get("episodeId") ||
-    (data && data[0]?.id);
-
-  const pageNumberParams =
-    new URLSearchParams(location.search).get("page") || 1;
-
-  const episodeNumberParams =
-    new URLSearchParams(location.search).get("episodeNumber") || 1;
+  const episodeId = searchParams.get("episodeId") || (data && data[0]?.id);
+  const pageNumber = searchParams.get("page") || 1;
+  const episodeNumber = searchParams.get("episodeNumber") || 1;
 
   const fetchEpisode = useCallback(
     async (episodeId: string) => {
@@ -46,11 +43,11 @@ const WatchPage = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    if (episodeIdParams) {
-      fetchEpisode(episodeIdParams);
+    if (episodeId) {
+      fetchEpisode(episodeId);
     }
     return () => setVideoUrl("");
-  }, [location, episodeIdParams, fetchEpisode]);
+  }, [location, episodeId, fetchEpisode]);
 
   if (isLoading && animeInfoDataLoading) {
     return (
@@ -86,15 +83,31 @@ const WatchPage = () => {
             </Box>
           </Box>
         )}
+        <div className="mt-5 text-2xl text-primary font-bold">
+          <h1>Comments</h1>
+          <Separator className="my-4" />
+          {data &&
+            data?.find(
+              (episode) => episode.number === Number(episodeNumber)
+            ) && (
+              <Comments
+                episodeId={
+                  data?.find(
+                    (episode) => episode.number === Number(episodeNumber)
+                  )?.id as string
+                }
+              />
+            )}
+        </div>
       </Box>
       <Box className="w-full mt-10 lg:w-[40%] lg:px-5 lg:mt-0">
         <div>
           <EpisodeLinks
             data={data}
             animeId={animeId}
-            currentPageNumber={Number(pageNumberParams)}
+            currentPageNumber={Number(pageNumber)}
             dataIsLoading={isLoading}
-            episodeNumber={Number(episodeNumberParams)}
+            episodeNumber={Number(episodeNumber)}
           />
         </div>
       </Box>

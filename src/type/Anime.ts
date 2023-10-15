@@ -58,6 +58,7 @@ export interface IMeta {
     title?: string
     description?: string
     isFiller?: boolean
+    number: number
     url?: string
     image?: string
     releaseDate?: string
