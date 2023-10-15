@@ -27,7 +27,7 @@ export default function AnimeCardModal({ id, query }: AnimeCardModalProps) {
             {data?.title.english || data?.title.userPreferred || data?.title.romaji || data?.title.native}
           </p>
           <Box className={"flex flex-row gap-4 items-center"}>
-            <Link to={`/watch/${data?.id}`}>
+            <Link to={`/watch/${data?.id}?episodeNumber=1`}>
               <button className={"text-black rounded-full bg-green-600 hover:bg-green-400 px-5 font-bold"}>
                 <PlayArrow fontSize={"large"} />
               </button>
