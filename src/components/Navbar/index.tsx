@@ -1,14 +1,14 @@
 import kurebiimage from "../../assets/kurebiverse.png";
 import { useSelector } from "react-redux";
-import { User } from "@supabase/supabase-js";
 import UserNavbar from "@/components/Navbar/components/User.tsx";
 import Sidebar from "@/components/Navbar/components/Sidebar.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { FormEvent, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { selectorProps } from "@/type/Redux";
 
 export function Navbar() {
-  const { user } = useSelector((state: { user: { user: User } }) => state.user);
+  const { user } = useSelector((state : selectorProps) => state);
   const [userInput, setUserInput] = useState("");
   const navigate = useNavigate();
   const { pathname } = useLocation();

@@ -1,6 +1,5 @@
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import {proxyImage} from "@/lib/utils.ts";
-import {User} from "@supabase/supabase-js";
 import {Button} from "@/components/ui/button.tsx";
 import {
   DropdownMenu,
@@ -12,29 +11,30 @@ import {
 import {Switch} from "@/components/ui/switch.tsx";
 import {supabase} from "@/redux/auth/supabase.ts";
 import {useTheme} from "@/components/ui/theme-provider.tsx";
+import { initStateType } from "@/type/Redux";
 
 type UserNavbarProps = {
-  user: User | undefined
+  user: initStateType
 }
 
 export default function UserNavbar({ user } : UserNavbarProps) {
   const { theme, setTheme } = useTheme();
 
-  return user ? (
+  return user.userId ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant={"ghost"} className={"rounded-full h-9 w-9"}>
           <Avatar className={"h-9 w-9"}>
-            <AvatarImage src={proxyImage(user.user_metadata.avatar_url)} alt={user.user_metadata.name}/>
-            <AvatarFallback>{user.user_metadata.name.substring(0, 1).toUpperCase()}</AvatarFallback>
+            <AvatarImage src={proxyImage(user.profileUrl)} alt={user.username}/>
+            <AvatarFallback>{user.username.substring(0, 1).toUpperCase()}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user.user_metadata.name}</p>
-            <p className="text-xs leading-none text-muted-foreground">{user.user_metadata.email}</p>
+            <p className="text-sm font-medium leading-none">{user.username}</p>
+            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator/>

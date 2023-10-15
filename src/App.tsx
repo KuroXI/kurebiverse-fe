@@ -19,13 +19,25 @@ function App() {
 
   useEffect(() => {
     supabase.auth.getSession().then((session) => {
-      dispatch(setUserDetails({ user: session.data.session?.user }));
+      supabase
+        .from("users")
+        .select("*")
+        .eq("userId", session.data.session?.user.id)
+        .then(({ data }) => {
+          if (data) dispatch(setUserDetails(data[0]));
+        });
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      dispatch(setUserDetails({ user: session?.user }));
+      supabase
+        .from("users")
+        .select("*")
+        .eq("userId", session?.user.id)
+        .then(({ data }) => {
+          if (data) dispatch(setUserDetails(data[0]));
+        });
     });
 
     return () => subscription.unsubscribe();
