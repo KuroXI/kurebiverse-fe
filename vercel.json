@@ -1,23 +1,11 @@
 {
-  "rewrites": [
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "routes": [
     {
-      "source": "/serviceworker.js",
-      "destination": "/serviceworker.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/serviceworker.js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        }
-      ]
+      "src": "/serviceworker.js",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
     }
   ]
 }
