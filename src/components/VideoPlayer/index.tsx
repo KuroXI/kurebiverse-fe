@@ -3,6 +3,8 @@ import "vidstack/styles/defaults.css";
 import "vidstack/styles/community-skin/video.css";
 
 const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
+	
+
 	const onEnd = () => {
 		console.log("video ended");
 	};
