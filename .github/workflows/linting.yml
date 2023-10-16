@@ -1,15 +1,23 @@
-on:
-  push:
-    branches:
-      - main
-
+name: Lint Stage
+on: [push]
 jobs:
   build:
+    name: Strict Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout Git Repository
+        uses: actions/checkout@v4
+
+      - name: Settting Up Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci
-      - run: npm run lint
+
+      - name: Installing Node Dependencies
+        run: npm ci
+
+      - name: Checking Lint
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          prettier: true
