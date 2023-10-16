@@ -1,4 +1,4 @@
-export type initStateType = {
+export type UserInitialState = {
 	userId: string;
 	username: string;
 	profileUrl?: string;
@@ -6,6 +6,6 @@ export type initStateType = {
 	email: string;
 };
 
-export type selectorProps = {
-	user: initStateType;
+export type SelectorState = {
+	user: UserInitialState;
 };
