@@ -38,7 +38,7 @@ export function proxyM3U8(url: string): string {
 }
 
 export function cleanDescription(description: string): string {
-  return description.replace(/\(Source:[\s\S]*$/g, "").replace(/<[^>]*>/g, "");
+  return description.replace(/\(Source:[\s\S]*$/g, "").replace(/<[^>]*?>/g, "");
 }
 
 export function progressBar(start: number, total: number): number {
