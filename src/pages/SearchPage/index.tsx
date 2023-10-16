@@ -73,7 +73,7 @@ const SearchPage = () => {
 			>
 				{results.map((anime, index) => (
 					<ImageListItem
-						key={`${index}-trending`}
+						key={`${currentPage}-${index}-trending`}
 						onClick={() => {
 							setId(String(anime.id));
 							setConfirmationModal(true);
