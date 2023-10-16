@@ -38,7 +38,16 @@ export function proxyM3U8(url: string): string {
 }
 
 export function cleanDescription(description: string): string {
-  return description.replace(/\(Source:[\s\S]*$/g, "").replace(/<[^>]*?>/g, "");
+  const tempElement = document.createElement("div");
+  tempElement.innerHTML = description;
+  const cleanDescription =
+    tempElement.textContent || tempElement.innerText || "";
+
+  const indexOfSource = cleanDescription.indexOf("(Source:");
+
+  return indexOfSource !== -1
+    ? cleanDescription.substring(0, indexOfSource)
+    : cleanDescription;
 }
 
 export function progressBar(start: number, total: number): number {
