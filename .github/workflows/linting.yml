@@ -20,4 +20,7 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
+          eslint_auto_fix: false
+          eslint_extensions: css,html,js,json,jsx,md,sass,scss,ts,tsx,yaml,yml
           prettier: true
+          tsc: true
