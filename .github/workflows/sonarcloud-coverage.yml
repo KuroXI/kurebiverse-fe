@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   sonarcloud:
@@ -15,7 +17,7 @@ jobs:
 
       - name: Installing Node Dependencies
         run: npm ci
-        
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
