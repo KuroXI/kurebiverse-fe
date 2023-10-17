@@ -5,15 +5,18 @@ import Sidebar from "@/components/Navbar/components/Sidebar.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { FormEvent, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { selectorProps } from "@/type/Redux";
+import { SelectorState } from "@/type/Redux";
 
 export function Navbar() {
-  const { user } = useSelector((state : selectorProps) => state);
+  const { user } = useSelector((state: SelectorState) => state);
   const [userInput, setUserInput] = useState("");
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const invalidPathname = ["/login"];
+  const invalidPathname = [
+    "/login",
+    "/register"
+  ];
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

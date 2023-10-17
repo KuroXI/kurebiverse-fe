@@ -6,9 +6,9 @@ import {
   TrendingPage,
   WatchPage,
   LatestEpisodesPage,
+  Authentication,
 } from "./pages";
 import { Navbar } from "./components";
-import Index from "./components/Auth";
 import { useEffect } from "react";
 import { supabase } from "./redux/auth/supabase.ts";
 import { setUserDetails } from "./redux/userSlice.ts";
@@ -19,6 +19,8 @@ function App() {
 
   useEffect(() => {
     supabase.auth.getSession().then((session) => {
+      if (!session.data.session?.user.id) return;
+
       supabase
         .from("users")
         .select("*")
@@ -31,13 +33,15 @@ function App() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      supabase
-        .from("users")
-        .select("*")
-        .eq("userId", session?.user.id)
-        .then(({ data }) => {
-          if (data) dispatch(setUserDetails(data[0]));
-        });
+      if (session?.user.id) {
+        supabase
+          .from("users")
+          .select("*")
+          .eq("userId", session?.user.id)
+          .then(({ data }) => {
+            if (data) dispatch(setUserDetails(data[0]));
+          });
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -53,7 +57,10 @@ function App() {
         <Route path="/latest" element={<LatestEpisodesPage />} />
         <Route path="/watch/:animeId" element={<WatchPage />} />
         <Route path="/search/:searchQuery" element={<SearchPage />} />
-        <Route path="/login" element={<Index />} />
+
+        {/* Authentication */}
+        <Route path="/login" element={<Authentication type="login" />} />
+        <Route path="/register" element={<Authentication type="register" />} />
       </Routes>
     </>
   );

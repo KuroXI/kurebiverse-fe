@@ -1,4 +1,3 @@
-import "./styles.scss";
 import Hero from "./components/Hero.tsx";
 import AnimeCardRow from "./components/AnimeCardRow.tsx";
 import {
@@ -8,7 +7,7 @@ import {
 } from "@/redux/services/animeapi.ts";
 import HistoryRow from "@/pages/LandingPage/components/HistoryRow.tsx";
 
-const LandingPage = () => {
+export const LandingPage = () => {
   return (
     <>
       <Hero />
@@ -33,5 +32,3 @@ const LandingPage = () => {
     </>
   );
 };
-
-export { LandingPage };
