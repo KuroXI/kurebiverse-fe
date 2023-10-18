@@ -19,9 +19,7 @@ const WatchPage = () => {
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-  const episodeId =
-    searchParams.get("episodeId") ??
-    (animeEpisode.data && animeEpisode.data[0].id);
+  const episodeId = searchParams.get("episodeId") ?? animeEpisode.data?.[0]?.id;
   const pageNumber = searchParams.get("page") ?? 1;
   const episodeNumber = searchParams.get("episodeNumber") ?? 1;
 

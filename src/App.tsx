@@ -1,8 +1,7 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { LandingPage, WatchPage, Authentication, Discover } from "./pages";
 import { Navbar } from "./components";
-import { useEffect } from "react";
 import { supabase } from "./redux/auth/supabase.ts";
 import { setUserDetails } from "./redux/userSlice.ts";
 import { useDispatch } from "react-redux";
