@@ -19,9 +19,9 @@ const WatchPage = () => {
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-  const episodeId = searchParams.get("episodeId") || (animeEpisode.data && animeEpisode.data[0].id);
-  const pageNumber = searchParams.get("page") || 1;
-  const episodeNumber = searchParams.get("episodeNumber") || 1;
+  const episodeId = searchParams.get("episodeId") ?? (animeEpisode.data && animeEpisode.data[0].id);
+  const pageNumber = searchParams.get("page") ?? 1;
+  const episodeNumber = searchParams.get("episodeNumber") ?? 1;
 
   const fetchEpisode = useCallback(
     async (episodeId: string) => {
@@ -56,7 +56,7 @@ const WatchPage = () => {
   return (
     <Box className="flex flex-col lg:flex-row justify-between p-5 min-h-[100vh]">
       <Box className="w-full flex flex-col">
-        <VideoPlayer key={videoUrl + Date.now()} videoUrl={videoUrl} />
+        <VideoPlayer videoUrl={videoUrl} />
         {animeInfo.data && (
           <Box className="md:flex mt-5 hidden">
             <Box className="mr-5">
