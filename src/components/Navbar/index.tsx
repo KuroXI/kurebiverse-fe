@@ -7,16 +7,13 @@ import { FormEvent, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SelectorState } from "@/type/Redux";
 
-export function Navbar() {
+const Navbar = () => {
   const { user } = useSelector((state: SelectorState) => state);
   const [userInput, setUserInput] = useState("");
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const invalidPathname = [
-    "/login",
-    "/register"
-  ];
+  const invalidPathname = ["/login", "/register"];
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,4 +52,6 @@ export function Navbar() {
       <UserNavbar user={user} />
     </nav>
   );
-}
+};
+
+export default Navbar;

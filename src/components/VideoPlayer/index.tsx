@@ -19,4 +19,4 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 	);
 };
 
-export { VideoPlayer };
+export default VideoPlayer;

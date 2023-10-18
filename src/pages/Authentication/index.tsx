@@ -14,7 +14,7 @@ type AuthenticationProps = {
   type: string;
 };
 
-export const Authentication = ({ type }: AuthenticationProps) => {
+const Authentication = ({ type }: AuthenticationProps) => {
   async function loginWithOAuth(event: SyntheticEvent) {
     event.preventDefault();
     await supabase.auth.signInWithOAuth({ provider: "google" });
@@ -52,3 +52,5 @@ export const Authentication = ({ type }: AuthenticationProps) => {
     </div>
   );
 };
+
+export default Authentication;

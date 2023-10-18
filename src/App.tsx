@@ -1,10 +1,11 @@
+import { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { LandingPage, WatchPage, Authentication, Discover } from "./pages";
 import { Navbar } from "./components";
-import { useEffect } from "react";
 import { supabase } from "./redux/auth/supabase.ts";
 import { setUserDetails } from "./redux/userSlice.ts";
 import { useDispatch } from "react-redux";
+import { CircularProgress } from "@mui/material";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,15 +43,20 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/watch/:animeId" element={<WatchPage />} />
-        <Route path="/discover" element={<Discover />} />
+      <Suspense fallback={<CircularProgress />}>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/watch/:animeId" element={<WatchPage />} />
+          <Route path="/discover" element={<Discover />} />
 
-        {/* Authentication */}
-        <Route path="/login" element={<Authentication type="login" />} />
-        <Route path="/register" element={<Authentication type="register" />} />
-      </Routes>
+          {/* Authentication */}
+          <Route path="/login" element={<Authentication type="login" />} />
+          <Route
+            path="/register"
+            element={<Authentication type="register" />}
+          />
+        </Routes>
+      </Suspense>
     </>
   );
 }

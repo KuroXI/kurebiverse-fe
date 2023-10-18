@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthButton } from "./AuthButton";
 import { Field } from "./Field";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/useToast";
 
 export const Register = () => {
   const { toast } = useToast();

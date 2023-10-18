@@ -19,7 +19,7 @@ const WatchPage = () => {
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-  const episodeId = searchParams.get("episodeId") ?? (animeEpisode.data && animeEpisode.data[0].id);
+  const episodeId = searchParams.get("episodeId") ?? animeEpisode.data?.[0]?.id;
   const pageNumber = searchParams.get("page") ?? 1;
   const episodeNumber = searchParams.get("episodeNumber") ?? 1;
 
@@ -29,12 +29,12 @@ const WatchPage = () => {
 
       const { data: fetchedData } = await axios.get(`/episode/${episodeId}`);
       const defaultSource = fetchedData.sources.find(
-        (source: { quality: string }) => source.quality === "default"
+        (source: { quality: string }) => source.quality === "default",
       );
 
       setVideoUrl(defaultSource?.url || "");
     },
-    [animeId]
+    [animeId],
   );
 
   useEffect(() => {
@@ -93,4 +93,4 @@ const WatchPage = () => {
   );
 };
 
-export { WatchPage };
+export default WatchPage;
