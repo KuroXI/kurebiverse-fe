@@ -5,10 +5,10 @@ import { Register } from "./components/Register";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { GoogleIcon } from "@/components/ui/icons";
-import { Toaster } from "sonner";
 import { SyntheticEvent } from "react";
 import { supabase } from "@/redux/auth/supabase";
 import { Header } from "./components/Header";
+import { Toaster } from "@/components/ui/toaster";
 
 type AuthenticationProps = {
   type: string;
@@ -21,7 +21,7 @@ export const Authentication = ({ type }: AuthenticationProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-10 items-center justify-center h-screen max-w-sm mx-auto relative animate-slideIn">
+    <div className="flex flex-col gap-10 items-center justify-center h-screen max-w-sm mx-auto relative animate-slideUp">
       <a href="/">
         <img src={kurebiimage} alt="logo" className="w-80" />
       </a>
@@ -47,7 +47,7 @@ export const Authentication = ({ type }: AuthenticationProps) => {
             Google
           </Button>
         </CardContent>
-        <Toaster richColors />
+        <Toaster />
       </Card>
     </div>
   );

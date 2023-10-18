@@ -6,7 +6,7 @@ import { supabase } from "@/redux/auth/supabase";
 import { useSelector } from "react-redux";
 import { SelectorState } from "@/type/Redux";
 
-export default function HistoryRow() {
+export const HistoryRow = () => {
   const sliderRef = createRef<HTMLDivElement>();
   const [hasScroll, setHasScroll] = useState(false);
   const [history, setHistory] = useState<History[] | null>(null);

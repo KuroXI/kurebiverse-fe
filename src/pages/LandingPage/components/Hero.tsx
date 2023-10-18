@@ -7,7 +7,7 @@ import { Bookmark, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ITitle } from "@/type/Anime";
 
-export default function Hero() {
+export const Hero = () => {
   const { data, isLoading } = useGetRandomAnimeQuery(null);
 
   if (data === null) window.location.reload();
