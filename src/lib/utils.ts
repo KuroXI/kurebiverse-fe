@@ -17,7 +17,7 @@ export function displayTitle({
   romaji,
   native,
 }: ITitle): string {
-  return english || userPreferred || romaji || native || "";
+  return english ?? userPreferred ?? romaji ?? native ?? "";
 }
 
 export function proxyImage(image: string | null = ""): string {
@@ -41,7 +41,7 @@ export function cleanDescription(description: string): string {
   const tempElement = document.createElement("div");
   tempElement.innerHTML = description;
   const cleanDescription =
-    tempElement.textContent || tempElement.innerText || "";
+    tempElement.textContent ?? tempElement.innerText ?? "";
 
   const indexOfSource = cleanDescription.indexOf("(Source:");
 

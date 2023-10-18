@@ -53,9 +53,9 @@ export const Hero = () => {
           {displayTitle(data?.title || ({} as ITitle))}
         </h1>
         <div className={"flex flex-wrap overflow-hidden gap-x-2 gap-y-1"}>
-          {data?.genres.map((genre, index) => (
+          {data?.genres.map((genre) => (
             <Badge
-              key={`genre-${index}`}
+              key={genre.toLowerCase()}
               variant={"secondary"}
               className={"font-light text-sm"}
             >
