@@ -1,16 +1,13 @@
 import { Helmet } from "react-helmet-async";
 
-const SEO = ({
-  title,
-  description,
-  name,
-  type,
-}: {
+type SEOProps = {
   title: string;
   description: string;
   name: string;
   type: string;
-}) => {
+};
+
+export const SEO = ({ title, description, name, type }: SEOProps) => {
   return (
     <Helmet>
       {/* Standard metadata tags */}
@@ -30,7 +27,4 @@ const SEO = ({
       {/* End Twitter tags */}
     </Helmet>
   );
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
-export { SEO };
+}
