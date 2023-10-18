@@ -22,7 +22,9 @@ export const Authentication = ({ type }: AuthenticationProps) => {
 
   return (
     <div className="flex flex-col gap-10 items-center justify-center h-screen max-w-sm mx-auto relative animate-slideIn">
-      <img src={kurebiimage} alt="logo" className="w-80" />
+      <a href="/">
+        <img src={kurebiimage} alt="logo" className="w-80" />
+      </a>
       <Card className="w-full">
         <CardHeader>
           <Header type={type} />
