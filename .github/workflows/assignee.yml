@@ -1,0 +1,24 @@
+name: Auto Assign
+on:
+  issues:
+    types:
+      - opened
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Auto Assigning
+        uses: gustavofreze/auto-assign@1.0.0
+        with:
+          assignees: "KuroXI"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          allow_self_assign: true
+          allow_no_assignees: true
+          assignment_options: "ISSUE,PULL_REQUEST"
