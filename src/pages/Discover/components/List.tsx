@@ -60,7 +60,7 @@ export const List = () => {
             <Filter
               name="Category"
               defaultValue={filter || undefined}
-              filters={Filters.get("category") || []}
+              filters={Filters.get("category") ?? []}
             />
           </div>
           <Separator className="my-2" />

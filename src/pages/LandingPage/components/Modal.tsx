@@ -40,9 +40,9 @@ export const Modal = ({ anime }: ModalProps) => {
                 {displayTitle(anime.title)}
               </h1>
               <div className="flex flex-wrap gap-2 md:justify-normal justify-center">
-                {anime.genres.map((genre, index) => (
+                {anime.genres.map((genre) => (
                   <Badge
-                    key={index}
+                    key={genre}
                     variant={"secondary"}
                     className={"font-light md:text-sm text-xs"}
                   >

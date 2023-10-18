@@ -52,7 +52,7 @@ export const Row = ({ url, title }: RowProps) => {
         {isLoading
           ? [...Array(20)].map((_, index) => (
               <Skeleton
-                key={index}
+                key={`skeleton-${index}`}
                 className="max-w-[300px] max-h-[350px] min-w-[200px] min-h-[250px] w-16 h-52"
               />
             ))
