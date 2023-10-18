@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
 type SEOProps = {
   title: string;
@@ -7,7 +7,7 @@ type SEOProps = {
   type: string;
 };
 
-const SEO = ({ title, description, name, type }: SEOProps) => {
+export const SEO = ({ title, description, name, type }: SEOProps) => {
   return (
     <Helmet>
       {/* Standard metadata tags */}
@@ -28,5 +28,3 @@ const SEO = ({ title, description, name, type }: SEOProps) => {
     </Helmet>
   );
 }
-
-export default SEO;
