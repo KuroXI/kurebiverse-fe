@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { AuthButton } from "./AuthButton";
 import { Field } from "./Field";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/useToast";
 
 export const Login = () => {
   const { toast } = useToast();
