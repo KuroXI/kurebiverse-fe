@@ -1,13 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import {
-  LandingPage,
-  PopularPage,
-  SearchPage,
-  TrendingPage,
-  WatchPage,
-  LatestEpisodesPage,
-  Authentication,
-} from "./pages";
+import { LandingPage, WatchPage, Authentication, Discover } from "./pages";
 import { Navbar } from "./components";
 import { useEffect } from "react";
 import { supabase } from "./redux/auth/supabase.ts";
@@ -52,11 +44,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/trending" element={<TrendingPage />} />
-        <Route path="/popular" element={<PopularPage />} />
-        <Route path="/latest" element={<LatestEpisodesPage />} />
         <Route path="/watch/:animeId" element={<WatchPage />} />
-        <Route path="/search/:searchQuery" element={<SearchPage />} />
+        <Route path="/discover" element={<Discover />} />
 
         {/* Authentication */}
         <Route path="/login" element={<Authentication type="login" />} />

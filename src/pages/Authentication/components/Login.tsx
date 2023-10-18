@@ -3,13 +3,15 @@ import { supabase } from "@/redux/auth/supabase";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { AuthButton } from "./AuthButton";
 import { Field } from "./Field";
+import { useToast } from "@/components/ui/use-toast";
 
 export const Login = () => {
+  const { toast } = useToast();
+
   const schema = z.object({
     email: z.string().email(),
     password: z.string().min(1, "The password is required"),
@@ -21,7 +23,8 @@ export const Login = () => {
 
   async function onLogin(values: z.infer<typeof schema>) {
     const { error } = await supabase.auth.signInWithPassword(values);
-    if (error) toast.error(error.message);
+    
+    if (error) toast({ description: error.message });
   }
 
   return (

@@ -3,11 +3,13 @@ import { supabase } from "@/redux/auth/supabase";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { AuthButton } from "./AuthButton";
 import { Field } from "./Field";
+import { useToast } from "@/components/ui/use-toast";
 
 export const Register = () => {
+  const { toast } = useToast();
+
   const schema = z
     .object({
       email: z.string().email(),
@@ -28,7 +30,8 @@ export const Register = () => {
       email: values.email,
       password: values.password,
     });
-    if (error) toast.error(error.message);
+    
+    if (error) toast({ description: error.message });
   }
 
   return (
