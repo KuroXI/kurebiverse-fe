@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { v4 } from "uuid";
 
 type EpisodeSkeletonProps = {
   episodePerPage: number;
@@ -8,7 +9,7 @@ const EpisodeSkeleton = ({ episodePerPage }: EpisodeSkeletonProps) => {
   return (
     <div className="flex flex-col gap-2">
       {[...Array(episodePerPage)].map(() => (
-        <div className="flex gap-2">
+        <div key={v4()} className="flex gap-2">
           <Skeleton className="min-w-[180px] min-h-[110px] w-[180px] h-[110px] relative overflow-hidden rounded mr-5" />
           <div className="flex flex-col gap-2 items-start justify-center w-full">
             <Skeleton className="h-8 w-full rounded-sm" />
