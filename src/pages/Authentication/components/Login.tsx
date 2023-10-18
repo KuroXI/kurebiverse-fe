@@ -1,22 +1,13 @@
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { SpinnerIcon } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { supabase } from "@/redux/auth/supabase";
-import { LogInIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { AuthButton } from "./AuthButton";
+import { Field } from "./Field";
 
 export const Login = () => {
   const schema = z.object({
@@ -36,36 +27,17 @@ export const Login = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onLogin)} className="grid gap-2">
-        <FormField
+        <Field
           control={form.control}
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center justify-between">
-                Email
-                <FormMessage />
-              </FormLabel>
-              <FormControl>
-                <Input {...field} disabled={form.formState.isSubmitting} />
-              </FormControl>
-            </FormItem>
-          )}
+          isSubmitting={form.formState.isSubmitting}
         />
-        <FormField
+        <Field
           control={form.control}
           name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center justify-between">
-                Password
-                <FormMessage />
-              </FormLabel>
-              <FormControl>
-                <Input {...field} disabled={form.formState.isSubmitting} />
-              </FormControl>
-            </FormItem>
-          )}
+          isSubmitting={form.formState.isSubmitting}
         />
+
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <Checkbox id="remember" />
@@ -75,14 +47,8 @@ export const Login = () => {
             Forgot Password?
           </a>
         </div>
-        <Button className="w-full mt-6" type="submit">
-          {form.formState.isSubmitting ? (
-            <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <LogInIcon className="mr-2 h-4 w-4" />
-          )}
-          Login
-        </Button>
+
+        <AuthButton isSubmitting={form.formState.isSubmitting} name="Login" />
       </form>
     </Form>
   );

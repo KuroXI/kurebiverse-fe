@@ -1,5 +1,6 @@
 import { CardDescription, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
+import { HeaderMessage } from "../constant";
 
 type HeaderProps = {
   type: string;
@@ -15,13 +16,7 @@ export const Header = ({ type }: HeaderProps) => {
   const [data, setData] = useState<dataProps>({} as dataProps);
 
   useEffect(() => {
-    if (type === "login") {
-      setData({
-        title: "Sign In",
-        description: "Don't have an account?",
-        link: "Sign Up",
-      });
-    }
+    setData(HeaderMessage.get(type) as dataProps)
   }, [type]);
 
   return (
