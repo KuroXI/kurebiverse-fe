@@ -11,10 +11,10 @@ import {
 import {Switch} from "@/components/ui/switch.tsx";
 import {supabase} from "@/redux/auth/supabase.ts";
 import {useTheme} from "@/components/ui/theme-provider.tsx";
-import { initStateType } from "@/type/Redux";
+import { UserInitialState } from "@/type/Redux";
 
 type UserNavbarProps = {
-  user: initStateType
+  user: UserInitialState
 }
 
 export default function UserNavbar({ user } : UserNavbarProps) {
