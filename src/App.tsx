@@ -5,7 +5,7 @@ import { Navbar } from "./components";
 import { supabase } from "./redux/auth/supabase.ts";
 import { setUserDetails } from "./redux/userSlice.ts";
 import { useDispatch } from "react-redux";
-import { CircularProgress } from "@mui/material";
+import { SpinnerIcon } from "./components/ui/icons.tsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<SpinnerIcon className="h-10 w-10 animate-spin" />}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/watch/:animeId" element={<WatchPage />} />
