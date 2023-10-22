@@ -1,6 +1,5 @@
-import React from "react";
+import { lazy } from "react";
 import { SEO } from "./SEO";
-const Navbar = React.lazy(() => import("./Navbar"));
-const VideoPlayer = React.lazy(() => import("./VideoPlayer"));
+const Navbar = lazy(() => import("./Navbar"));
 
-export { Navbar, SEO, VideoPlayer };
+export { Navbar, SEO };

@@ -1,11 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Buffer } from "buffer";
-import dayjs from "dayjs";
-import calendar from "dayjs/plugin/calendar";
 import { ITitle } from "@/type/Anime";
-
-dayjs.extend(calendar);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -72,15 +68,4 @@ export function parseTime(time: number) {
     format += `${minutes > 0 && seconds < 10 ? "0" : ""}${seconds}`;
 
   return format;
-}
-
-export function parseCommentDate(date: string): string {
-  return dayjs().calendar(dayjs(date), {
-    sameDay: "[Today at] h:mm A",
-    nextDay: "[Tomorrow at] h:mm A",
-    nextWeek: "dddd [at] h:mm A",
-    lastDay: "[Yesterday at] h:mm A",
-    lastWeek: "[Last] dddd [at] h:mm A",
-    sameElse: "DD/MM/YYYY h:mm A",
-  });
 }

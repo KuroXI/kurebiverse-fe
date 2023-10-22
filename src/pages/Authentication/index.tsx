@@ -9,6 +9,7 @@ import { SyntheticEvent } from "react";
 import { supabase } from "@/redux/auth/supabase";
 import { Header } from "./components/Header";
 import { Toaster } from "@/components/ui/toaster";
+import { Link } from "react-router-dom";
 
 type AuthenticationProps = {
   type: string;
@@ -22,9 +23,9 @@ const Authentication = ({ type }: AuthenticationProps) => {
 
   return (
     <div className="flex flex-col gap-10 items-center justify-center h-screen max-w-sm mx-auto relative animate-slideUp">
-      <a href="/">
+      <Link to="/">
         <img src={kurebiimage} alt="logo" className="w-80" />
-      </a>
+      </Link>
       <Card className="w-full">
         <CardHeader>
           <Header type={type} />

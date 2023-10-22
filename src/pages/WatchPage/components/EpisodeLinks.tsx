@@ -23,7 +23,7 @@ interface Props {
   episodeNumber: number;
 }
 
-const EpisodeLinks: FC<Props> = ({
+export const EpisodeLinks: FC<Props> = ({
   data,
   animeId,
   currentPageNumber,
@@ -142,5 +142,3 @@ const EpisodeLinks: FC<Props> = ({
     </div>
   );
 };
-
-export default EpisodeLinks;
