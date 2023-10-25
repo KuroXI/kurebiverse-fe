@@ -1,16 +1,32 @@
-import { CircularProgress } from "@mui/material";
-import { useGetRandomAnimeQuery } from "@/redux/services/animeapi.ts";
+import axios from "axios";
+import { randomInt } from "node:crypto";
 import { cleanDescription, displayTitle, proxyImage } from "@/lib/utils.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Bookmark, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ITitle } from "@/type/Anime";
+import { useQuery } from "@tanstack/react-query";
+import { LandingRandomQuery } from "@/lib/query";
+import { AnimeRandom } from "@/type/Landing/type";
+import { SpinnerIcon } from "@/components/ui/icons";
 
 export const Hero = () => {
-  const { data, isLoading } = useGetRandomAnimeQuery(null);
-
-  if (data === null) window.location.reload();
+  const { data, isLoading } = useQuery<AnimeRandom>({
+    queryKey: ["heroRandom"],
+    queryFn: () =>
+      axios
+        .post("https://consumet-graphql.vercel.app/graphql", {
+          query: LandingRandomQuery,
+          variables: {
+            perPage: 50,
+          },
+        })
+        .then(({ data }) => {
+          const length = data.data.anilist.getTrending.results.length;
+          return data.data.anilist.getTrending.results[randomInt(length)];
+        }),
+  });
 
   return isLoading ? (
     <header
@@ -19,14 +35,14 @@ export const Hero = () => {
       }
     >
       <div className="flex justify-center items-center w-full h-full">
-        <CircularProgress color="success" />
+        <SpinnerIcon className="h-10 w-10 animate-spin" />
       </div>
     </header>
   ) : (
     <header
       className={"relative h-[100vw] min-h-[400px] max-h-[700px]"}
       style={{
-        backgroundImage: `url(${proxyImage(data?.bannerImage)})`,
+        backgroundImage: `url(${proxyImage(data?.cover)})`,
         backgroundSize: "cover",
         backgroundPosition: "center top",
       }}
@@ -48,7 +64,7 @@ export const Hero = () => {
         }
       >
         <h1
-          className={"text-primary font-bold md:text-4xl text-3xl line-clamp-1"}
+          className={"text-primary font-bold md:text-4xl text-3xl line-clamp-2"}
         >
           {displayTitle(data?.title || ({} as ITitle))}
         </h1>
@@ -100,4 +116,4 @@ export const Hero = () => {
       />
     </header>
   );
-}
+};
