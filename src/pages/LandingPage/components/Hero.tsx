@@ -1,4 +1,5 @@
 import axios from "axios";
+import { randomInt } from "node:crypto";
 import { cleanDescription, displayTitle, proxyImage } from "@/lib/utils.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -22,8 +23,8 @@ export const Hero = () => {
           },
         })
         .then(({ data }) => {
-          const random = Math.floor(Math.random() * 50);
-          return data.data.anilist.getTrending.results[random];
+          const length = data.data.anilist.getTrending.results.length;
+          return data.data.anilist.getTrending.results[randomInt(length)];
         }),
   });
 
@@ -34,7 +35,7 @@ export const Hero = () => {
       }
     >
       <div className="flex justify-center items-center w-full h-full">
-        <SpinnerIcon className="h-10 w-10 animate-spin"/>
+        <SpinnerIcon className="h-10 w-10 animate-spin" />
       </div>
     </header>
   ) : (
