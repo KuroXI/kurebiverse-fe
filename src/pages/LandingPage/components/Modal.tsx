@@ -53,7 +53,7 @@ export const Modal = ({ anime }: ModalProps) => {
               </div>
               <Separator className="my-2 md:block hidden" />
               <p className="text-muted-foreground line-clamp-5 md:text-base text-sm">
-                {cleanDescription(anime.description as string)}
+                {cleanDescription(anime.description)}
               </p>
             </div>
           </div>
