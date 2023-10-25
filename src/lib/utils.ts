@@ -1,3 +1,4 @@
+import randomInteger from "random-int";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Buffer } from "buffer";
@@ -68,4 +69,8 @@ export function parseTime(time: number) {
     format += `${minutes > 0 && seconds < 10 ? "0" : ""}${seconds}`;
 
   return format;
+}
+
+export function randomInt(max: number) {
+  return randomInteger(max);
 }

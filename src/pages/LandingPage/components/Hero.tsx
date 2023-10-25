@@ -1,6 +1,5 @@
 import axios from "axios";
-import { randomInt } from "crypto";
-import { cleanDescription, displayTitle, proxyImage } from "@/lib/utils.ts";
+import { cleanDescription, displayTitle, proxyImage, randomInt } from "@/lib/utils.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Bookmark, PlayCircle } from "lucide-react";
