@@ -6,15 +6,15 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import {ThemeProvider} from "@/components/ui/theme-provider.tsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "@/components/ui/theme-provider.tsx";
+import { QueryClient, QueryClientConfig, QueryClientProvider } from "@tanstack/react-query";
 
 const helmetContext = {};
 
-const queryClientOptions = {
+const queryClientOptions : QueryClientConfig = {
   defaultOptions: {
     queries: {
-      suspense: true
+      refetchOnWindowFocus: false
     }
   }
 };
@@ -24,11 +24,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <HelmetProvider context={helmetContext}>
         <BrowserRouter>
-          <ThemeProvider defaultTheme={"dark"}>
-            <QueryClientProvider client={new QueryClient(queryClientOptions)}>
-              <App />
-            </QueryClientProvider>
-          </ThemeProvider>
+          <QueryClientProvider client={new QueryClient(queryClientOptions)}>
+            <ThemeProvider defaultTheme={"dark"}>
+                <App />
+            </ThemeProvider>
+          </QueryClientProvider>
         </BrowserRouter>
       </HelmetProvider>
     </Provider>

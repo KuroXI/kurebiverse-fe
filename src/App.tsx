@@ -5,7 +5,7 @@ import { Navbar } from "./components";
 import { supabase } from "./redux/auth/supabase.ts";
 import { setUserDetails } from "./redux/userSlice.ts";
 import { useDispatch } from "react-redux";
-import { SpinnerIcon } from "./components/ui/icons.tsx";
+import { Loader } from "./components/Loader/index.tsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Suspense fallback={<SpinnerIcon className="h-10 w-10 animate-spin" />}>
+      <Suspense fallback={<Loader/>}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/watch/:animeId" element={<WatchPage />} />

@@ -1,20 +1,24 @@
-import axiosInstance from "@/api/axios";
-import { IAnime, IResult } from "@/type/Anime";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Modal } from "./Modal";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createRef } from "react";
+import { AnimeInfo } from "@/type/Landing/type";
+import { Result } from "@/type/type";
 
 type RowProps = {
-  url: string;
+  query: string;
   title: string;
+  type: string;
 };
 
-export const Row = ({ url, title }: RowProps) => {
-  const { data } = useQuery<IResult<IAnime>, string>({
+export const Row = ({ query, title, type }: RowProps) => {
+  const { data } = useQuery<Result<AnimeInfo>, string>({
     queryKey: [title],
-    queryFn: () => axiosInstance(url).then(({ data }) => data),
+    queryFn: () => axios.post("https://consumet-graphql.vercel.app/graphql", {
+      query: query
+    }).then(({ data }) => data.data.anilist[type]),
   });
 
   const SliderRef = createRef<HTMLDivElement>();

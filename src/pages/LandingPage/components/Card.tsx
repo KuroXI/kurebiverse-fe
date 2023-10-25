@@ -1,8 +1,8 @@
 import { proxyImage } from "@/lib/utils";
-import { IAnime } from "@/type/Anime";
+import { AnimeInfo } from "@/type/Landing/type";
 
 type CardProps = {
-  anime: IAnime;
+  anime: AnimeInfo;
 };
 
 export const Card = ({ anime }: CardProps) => {
@@ -13,7 +13,7 @@ export const Card = ({ anime }: CardProps) => {
       }
     >
       <img
-        src={proxyImage(anime.coverImage?.extraLarge)}
+        src={proxyImage(anime.image)}
         alt={anime.id}
         sizes={
           "(min-width: 1080px) 300px, (min-width: 800px) calc(15.38vw + 37px), 200px"

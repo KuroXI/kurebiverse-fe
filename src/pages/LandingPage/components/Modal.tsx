@@ -6,15 +6,16 @@ import {
 } from "@/components/ui/dialog";
 import { cleanDescription, displayTitle, proxyImage } from "@/lib/utils";
 import { Card } from "./Card";
-import { IAnime } from "@/type/Anime";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { AnimeInfo } from "@/type/Landing/type";
 
 type ModalProps = {
-  anime: IAnime;
+  anime: AnimeInfo;
 };
 
 export const Modal = ({ anime }: ModalProps) => {
+
   return (
     anime && (
       <Dialog>
@@ -24,15 +25,15 @@ export const Modal = ({ anime }: ModalProps) => {
           </button>
         </DialogTrigger>
         <DialogContent className="w-full max-w-3xl">
-          <DialogHeader className="h-full md:hidden block">
+          <DialogHeader className="flex items-center h-full md:hidden">
             <img
-              src={proxyImage(anime.bannerImage)}
-              className="rounded-md h-full bg-contain"
+              src={proxyImage(anime.image)}
+              className="rounded-md h-full bg-contain w-36"
             />
           </DialogHeader>
           <div className="relative flex md:flex-row flex-col gap-5 items-start">
             <img
-              src={proxyImage(anime.coverImage?.extraLarge)}
+              src={proxyImage(anime.image)}
               className="rounded-md h-56 md:block hidden"
             />
             <div className="grid gap-1">
@@ -55,6 +56,11 @@ export const Modal = ({ anime }: ModalProps) => {
                 {cleanDescription(anime.description as string)}
               </p>
             </div>
+          </div>
+          <Separator/>
+          <div>
+            <h1>EPISODE LIST HERE</h1>
+            <h1>BUG: COVER IMAGE IS BUGGY!</h1>
           </div>
         </DialogContent>
       </Dialog>

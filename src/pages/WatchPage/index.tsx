@@ -53,18 +53,20 @@ const WatchPage = () => {
     return () => setSource(null);
   }, [episodeId, fetchEpisode, searchParams]);
 
-  if (animeInfo.isLoading && animeEpisode.isLoading) {
-    return (
-      <div className="justify-center flex mb-10">
-        <SpinnerIcon className="h-10 w-10 animate-spin" />
-      </div>
-    );
-  }
+  console.log(animeEpisode.data);
 
   return (
     <div className="flex flex-col lg:flex-row justify-between p-5 min-h-[100vh]">
       <div className="w-full flex flex-col">
-        <VideoPlayer episode={episode as IEpisode} source={source as ISource} />
+        {animeInfo.isLoading && animeEpisode.isLoading ? (
+          <SpinnerIcon className="h-10 w-10 animate-spin" />
+        ) : (
+          <VideoPlayer
+            episode={episode as IEpisode}
+            source={source as ISource}
+          />
+        )}
+
         {animeInfo.data && (
           <div className="md:flex mt-5 hidden">
             <div className="mr-5">
@@ -88,15 +90,17 @@ const WatchPage = () => {
           </div>
         )}
       </div>
-      <div className="w-full mt-10 lg:w-[40%] lg:px-5 lg:mt-0">
-        <EpisodeLinks
-          data={animeEpisode.data}
-          animeId={animeId}
-          currentPageNumber={Number(pageNumber)}
-          dataIsLoading={animeEpisode.isLoading}
-          episodeNumber={Number(episodeNumber)}
-        />
-      </div>
+      {animeEpisode.data && (
+        <div className="w-full mt-10 lg:w-[40%] lg:px-5 lg:mt-0">
+          <EpisodeLinks
+            data={animeEpisode.data}
+            animeId={animeId}
+            currentPageNumber={Number(pageNumber)}
+            dataIsLoading={animeEpisode.isLoading}
+            episodeNumber={Number(episodeNumber)}
+          />
+        </div>
+      )}
     </div>
   );
 };
