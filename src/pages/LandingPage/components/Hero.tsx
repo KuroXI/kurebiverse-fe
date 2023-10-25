@@ -1,5 +1,5 @@
 import axios from "axios";
-import { randomInt } from "node:crypto";
+import { randomInt } from "crypto";
 import { cleanDescription, displayTitle, proxyImage } from "@/lib/utils.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { Button } from "@/components/ui/button.tsx";
