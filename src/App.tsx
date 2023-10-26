@@ -5,7 +5,7 @@ import { Navbar } from "./components";
 import { supabase } from "./redux/auth/supabase.ts";
 import { setUserDetails } from "./redux/userSlice.ts";
 import { useDispatch } from "react-redux";
-import { Loader } from "./components/Loader/index.tsx";
+import { Loader } from "./components/ui/loader.tsx";
 
 function App() {
   const dispatch = useDispatch();

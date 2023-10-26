@@ -1,7 +1,7 @@
 import { History } from "@/type/History.ts";
 import { useGetAnimeInfoQuery } from "@/redux/services/animeapi.ts";
 import { displayTitle, parseTime, progressBar } from "@/lib/utils.ts";
-import { Skeleton } from "@mui/material";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type HistoryCardProps = {
   anime: History;
